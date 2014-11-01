@@ -8,6 +8,8 @@
     <h1>KOT</h1>
     <form class="new-task">
       <input type="text" name="text" placeholder="Syötä tunnit" />
+      <input type="text" name="comment" placeholder="Mitä teit?" />
+      <input type="submit" value="Voit tallentaa myös painamalla tästä"/>
     </form>
   </header>
   <ul>
@@ -18,6 +20,5 @@
   </div>
 </body>
 <template name="task">
-  <li>{{createdAt}}: {{text}} h</li>
+  <li>{{createdAt}}: {{text}} h {{comment}}</li>
 </template>
-<!-- testing commit and push to GitHub -->
