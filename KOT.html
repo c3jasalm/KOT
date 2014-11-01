@@ -3,12 +3,20 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <div class="container">
+  <header>
+    <h1>KOT</h1>
+    <form class="new-task">
+      <input type="text" name="text" placeholder="Syötä tunnit" />
+    </form>
+  </header>
+  <ul>
+    {{#each tasks}}
+    {{> task}}
+    {{/each}}
+  </ul>
+  </div>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="task">
+  <li>{{createdAt}}: {{text}} h</li>
 </template>
