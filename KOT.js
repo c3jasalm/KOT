@@ -5,7 +5,14 @@ if (Meteor.isClient) {
     tasks: function () {
     // Show newest tasks first
     return Tasks.find({}, {sort: {createdAt: -1}});
-  }
+  }, 
+  total: function () {
+    var total = 0;
+    Tasks.find().map(function(doc) {
+      total += parseInt(doc.text);
+        })
+    return total;
+    }
 });
 Template.body.events({
   "submit .new-task": function (event) {
