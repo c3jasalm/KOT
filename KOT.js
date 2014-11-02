@@ -9,7 +9,7 @@ if (Meteor.isClient) {
   total: function () {
     var total = 0;
     Tasks.find().map(function(doc) {
-      total += parseInt(doc.text);
+      total += parseInt(doc.hours);
         })
     return total;
     }
@@ -17,15 +17,15 @@ if (Meteor.isClient) {
 Template.body.events({
   "submit .new-task": function (event) {
       // This function is called when the new task form is submitted
-      var text = event.target.text.value;
+      var hours = event.target.hours.value;
       var comment = event.target.comment.value;
       Tasks.insert({
-      text: text,
+      hours: hours,
       comment: comment,
       createdAt: new Date() // current time
     });
       // Clear form
-      event.target.text.value = "";
+      event.target.hours.value = "";
       event.target.comment.value = "";
       // Prevent default form submit
       return false;
