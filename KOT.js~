@@ -18,9 +18,11 @@ Template.body.events({
   "submit .new-task": function (event) {
       // This function is called when the new task form is submitted
       var hours = event.target.hours.value;
+      var minutes = event.target.minutes.value;
       var comment = event.target.comment.value;
       Tasks.insert({
       hours: hours,
+      minutes: minutes,
       comment: comment,
       createdAt: new Date() // current time
     });

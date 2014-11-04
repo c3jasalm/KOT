@@ -6,16 +6,10 @@
   <div class="container">
   <header>
     <h1>KOT</h1>
-    {{> counter}}
+    <p>{{> counter}}</p>
     <form class="new-task">
       <input type="text" name="hours" placeholder="Syötä tunnit" />
-      Valitse minuutit
-      <select name="minutes">
-     		<option value=0>0</option>
-  			<option value=15>15</option>
-  			<option value=30>30</option>
-  			<option value=45>45</option>
-		</select>
+      {{> selector}}
       <input type="text" name="comment" placeholder="Mitä teit?" />
       <input type="submit" value="Voit tallentaa myös painamalla tästä"/>
     </form>
