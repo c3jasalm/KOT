@@ -1,14 +1,26 @@
 if (Meteor.isClient) {
  
-  Template.counter.helpers({
+ 	Template.selector.helpers({
  	
-});
+	});
 
-  Template.selector.events({
-    'submit form': function (event) {
-    //tallenna 
-    }
-  });
+  	Template.selector.events({
+	'click #datepicker': function(event) {
+		event.datepicker().val(new Date().asString());
+		event.preventDefault();
+	},
+	'submit form': function (event) {
+    		event.preventDefault();
+    		var startVar = new Date(); 
+    		var stopVar = new Date(startVar.getTime() + 				(event.target.minutesSelector.value*60000) + 				(event.target.hoursSelector.value*3600000)); 
+    		var usedTimeVar = stopVar - startVar;
+     		HoursList.insert({
+      			start: startVar,
+      			stop: stopVar,
+      			usedTime: usedTimeVar
+    		});
+    	}
+  	});
 }
 
 if (Meteor.isServer) {
