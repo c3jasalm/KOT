@@ -2,17 +2,32 @@ if (Meteor.isClient) {
   // counter starts at 0
 
     Template.totalHours.helpers({
-   	totalHours: function () {
+   	totalHoursString: function () {
       var total = 0;
-      HoursList.find().map(function(doc) {
-        total += parseInt(doc.stop - doc.start);
-        //total += doc.stop - doc.start;
+      HoursList.find().map(function(db) {
+        total += parseInt(db.stop - db.start);
           })
       var totalMinutes = total / 1000 / 60;
       var hours = parseInt(totalMinutes / 60);
-      var minutes = totalMinutes % 60;    
-      return hours.toString() + ":" + minutes.toString();
+      var minutes = totalMinutes % 60;
+      if (hours < 10) {
+        hoursStr = "0" + hours.toString();
       }
+      if (minutes < 10) {
+        minutesStr = "0" + minutes.toString();
+      }
+      return hoursStr + ":" + minutesStr;
+    },
+   	totalHoursFloat: function () {
+      var total = 0;
+      HoursList.find().map(function(db) {
+        total += parseInt(db.stop - db.start);
+          })
+      var totalMinutes = total / 1000 / 60;
+      var hours = totalMinutes / 60;
+
+      return hours;
+    }
   });
 
   Template.totalHours.events({
