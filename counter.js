@@ -46,11 +46,14 @@ if (Meteor.isClient) {
       
       // Save used hours
       var usedTimeVar = stopp -start.previousState; 
-    	HoursList.insert({
-      start: start.previousState,
-      stop: stopp,
-      usedTime: usedTimeVar
-      });
+      if(usedTimeVar >= 60000)
+      {
+          HoursList.insert({
+              start: start.previousState,
+              stop: stopp,
+              usedTime: usedTimeVar
+          });
+      }    
       // Call server to reset counter state
       Meteor.call('clearCounterState');
     		Session.set('currentState', 'off'); 
