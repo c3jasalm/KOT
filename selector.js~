@@ -8,8 +8,8 @@ if (Meteor.isClient) {
 	});
 
   	Template.selector.events({
-	'click #datepicker': function() {
-		$('#datepicker').datepicker();
+	'click #datepicker': function(event) {
+		$event.target.datepicker();
 	},
 	'submit form': function (event) {
     		event.preventDefault();

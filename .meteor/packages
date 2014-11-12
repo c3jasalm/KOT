@@ -6,3 +6,7 @@
 meteor-platform
 autopublish
 insecure
+linto:jquery-ui
+mizzao:bootstrap-3
+rajit:bootstrap3-datepicker
+
