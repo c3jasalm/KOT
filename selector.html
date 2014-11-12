@@ -2,7 +2,7 @@
 	<form>
 		Date 
 		<input id="datepicker" type="text" name="datepicker" value={{today}}>
-		Done hours
+		<!--Done hours
 	      	<select class="hours" name="hoursSelector">
 	     		<option value=0>0</option>
 	  			<option value=1>1</option>
@@ -16,6 +16,23 @@
   			<option value=30>30</option>
   			<option value=45>45</option>
 		</select>
+        -->
+        Hours done:
+      		<select class="hours" name="timeSelector">
+     		<option value=15>00:15</option>
+  			<option value=30>00:30</option>
+  			<option value=45>00:45</option>
+  			<option value=60>01:00</option>
+            <option value=75>01:15</option>
+  			<option value=90>01:30</option>
+  			<option value=105>01:45</option>
+  			<option value=120>02:00</option>
+            <option value=135>02:15</option>
+  			<option value=150>02:30</option>
+  			<option value=165>02:45</option>
+  			<option value=180>03:00</option>
+		</select>
+        <input type="text" name="comment" placeholder="Comment" />
 		<input type="submit" value="Submit">
 	</form>
 </template>		

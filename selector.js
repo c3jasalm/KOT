@@ -16,12 +16,23 @@ if (Meteor.isClient) {
     		event.preventDefault();
     		var todayVar = Date.parse(event.target.datepicker.value); //Get value from input. Will be replaced with datepicker
     		var startVar = new Date(todayVar); // Will be replaced with datepicker
-    		var stopVar = new Date(startVar.getTime() + 				(event.target.minutesSelector.value*60000) + 				(event.target.hoursSelector.value*3600000)); 
+            
+            //Get minutes
+            var stopMinutes = event.target.timeSelector.value;
+            
+            //Set used time
+    		var stopVar = new Date(startVar.getTime() + (stopMinutes*60000)); 
     		var usedTimeVar = stopVar - startVar;
+            
+            //Comment
+            var comment = event.target.comment.value;
+            
+            //Save to DB
      		HoursList.insert({
       			start: startVar,
       			stop: stopVar,
-      			usedTime: usedTimeVar
+      			usedTime: usedTimeVar,
+                comment: comment
     		});
     	}
   	});
