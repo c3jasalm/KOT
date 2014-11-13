@@ -1,0 +1,16 @@
+<template name="inputMethod">
+  <form>
+		<p>
+			Select input method:<br>
+			<input id="inputSelector" type="radio" name="inputMethod" value="true">Selector<br>
+  			<input id="inputCounter" type="radio" name="inputMethod" value="false" checked="checked">Counter
+  		</p>
+  	</form>
+  	
+  	{{#if method}}
+  		<p>{{> selector}}</p>
+	{{else}}
+  		<p>{{> counter}}</p>
+	{{/if}}
+	
+</template>
