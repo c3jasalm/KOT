@@ -38,6 +38,7 @@ if (Meteor.isClient) {
     	var state = Session.get('currentState');
     	if (state === 'on') {
     		stopp = new Date();
+    		startp = new Date(start.previousState);
       usedTime = new Date(stopp.getTime() - start.previousState.getTime());
       Session.set('stop', stopp);
       Session.set('usedHours', usedTime.getUTCHours());
@@ -45,15 +46,15 @@ if (Meteor.isClient) {
       Session.set('usedSeconds', usedTime.getSeconds());
       
       // Save used hours
-      var usedTimeVar = stopp -start.previousState; 
-      if(usedTimeVar >= 60000)
-      {
-          HoursList.insert({
-              start: start.previousState,
-              stop: stopp,
-              usedTime: usedTimeVar
-          });
-      }    
+      //var usedTimeVar = stopp -start.previousState; 
+      //if(usedTimeVar >= 60000)
+      //{
+      //    HoursList.insert({
+      //        start: start.previousState,
+      //        stop: stopp,
+      //        usedTime: usedTimeVar
+      //    });
+      //}    
       // Call server to reset counter state
       Meteor.call('clearCounterState');
     		Session.set('currentState', 'off'); 
@@ -65,6 +66,17 @@ if (Meteor.isClient) {
       	Meteor.call('setCounterState');
     		Session.set('currentState', 'on'); 
     	}
+    },
+    'submit form': function (event) {
+    	event.preventDefault();
+    	var usedTimeVar = stopp -startp;
+    	var comment = event.target.comment.value;
+    	HoursList.insert({
+      			start: startp,
+      			stop: stopp,
+      			usedTime: usedTimeVar,
+               comment: comment
+    		});
     }
   });
 }
