@@ -25,6 +25,7 @@ if (Meteor.isClient) {
     },
    	totalHoursFloat: function () {
       var total = 0;
+      var currentUserId = Meteor.userId();
       HoursList.find({userId: currentUserId}).map(function(db) {
         total += parseInt(db.stop - db.start);
           })
