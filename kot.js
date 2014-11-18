@@ -5,7 +5,8 @@ if (Meteor.isClient) {
 
   Template.displayHours.helpers({
     previousHours: function () {
-      return HoursList.find({}, {sort: {start: -1} })
+    	var currentUserId = Meteor.userId();
+      return HoursList.find({userId: currentUserId}, {sort: {start: -1} })
     }
   });
 

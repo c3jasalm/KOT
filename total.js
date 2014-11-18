@@ -4,7 +4,8 @@ if (Meteor.isClient) {
     Template.totalHours.helpers({
    	totalHoursString: function () {
       var total = 0;
-      HoursList.find().map(function(db) {
+      var currentUserId = Meteor.userId();
+      HoursList.find({userId: currentUserId}).map(function(db) {
         total += parseInt(db.stop - db.start);
           })
       var totalMinutes = total / 1000 / 60;
@@ -31,7 +32,10 @@ if (Meteor.isClient) {
       var hours = totalMinutes / 60;
 
       return hours;
-    }
+    },
+    	currentUserName: function () {
+    		return Meteor.userId();
+    	}
   });
 
   Template.totalHours.events({

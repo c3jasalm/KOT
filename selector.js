@@ -13,6 +13,7 @@ if (Meteor.isClient) {
 	},
 	'submit form': function (event) {
     		event.preventDefault();
+    		var currentUserId = Meteor.userId();
     		var todayVar = Date.parse(event.target.datepicker.value); //Get value from input. Will be replaced with datepicker
     		var startVar = new Date(todayVar); // Will be replaced with datepicker
             
@@ -28,6 +29,7 @@ if (Meteor.isClient) {
             
             //Save to DB
      		HoursList.insert({
+     				userId: currentUserId,
       			start: startVar,
       			stop: stopVar,
       			usedTime: usedTimeVar,

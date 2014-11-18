@@ -69,9 +69,11 @@ if (Meteor.isClient) {
     },
     'submit form': function (event) {
     	event.preventDefault();
+    	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
     	var comment = event.target.comment.value;
     	HoursList.insert({
+    				userId: currentUserId,
       			start: startp,
       			stop: stopp,
       			usedTime: usedTimeVar,
