@@ -34,7 +34,7 @@ if (Meteor.isClient) {
       return hours;
     },
     	currentUserName: function () {
-    		return Meteor.userId();
+    		return Meteor.user().emails[0].address;
     	}
   });
 
