@@ -25,7 +25,7 @@ if (Meteor.isClient) {
     },
    	totalHoursFloat: function () {
       var total = 0;
-      HoursList.find().map(function(db) {
+      HoursList.find({userId: currentUserId}).map(function(db) {
         total += parseInt(db.stop - db.start);
           })
       var totalMinutes = total / 1000 / 60;
