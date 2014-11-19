@@ -1,5 +1,7 @@
 <template name="displayHours">
-	{{#each previousHours}}
-  		<li>{{start}} 	{{stop}} {{usedTime}} - {{comment}}</li>
-	{{/each}}
+	{{#if currentUser}}
+		{{#each previousHours}}
+  			<li>{{start}} 	{{stop}} {{usedTime}} - {{comment}}</li>
+		{{/each}}
+	{{/if}}
 </template>
