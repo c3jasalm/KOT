@@ -5,10 +5,13 @@
 <body>
   <h1>KOT!</h1>
 	<p>{{> loginButtons}}</p>
-	<p>{{> inputMethod}}</p>
-	<p>{{> totalHours}}</p>
- 	<p>{{> displayHours}}</p>
-  
+	{{#if currentUser}}
+		<p>{{> inputMethod}}</p>
+		<p>{{> totalHours}}</p>
+ 		<p>{{> displayHours}}</p>
+ 		{{else}}
+ 			<p>Please login! Joku sopiva teksti tähän.</p>
+ 	{{/if}}
 </body>
 
 
