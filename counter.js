@@ -7,8 +7,9 @@ if (Meteor.isClient) {
  
   Template.counter.helpers({
  	'timeStart': function () {
- 		start = CounterState.findOne();
- 		if (start) {										// Set current counter state
+ 		var currentUserId = Meteor.userId();
+ 		start = CounterState.findOne({userId: currentUserId});
+ 		if (start) {						// Set current counter state
  			Session.set('currentState', 'on'); 
  		} else {
  			Session.set('currentState', 'off');
@@ -43,27 +44,18 @@ if (Meteor.isClient) {
       Session.set('stop', stopp);
       Session.set('usedHours', usedTime.getUTCHours());
       Session.set('usedMinutes', usedTime.getMinutes());
-      Session.set('usedSeconds', usedTime.getSeconds());
-      
-      // Save used hours
-      //var usedTimeVar = stopp -start.previousState; 
-      //if(usedTimeVar >= 60000)
-      //{
-      //    HoursList.insert({
-      //        start: start.previousState,
-      //        stop: stopp,
-      //        usedTime: usedTimeVar
-      //    });
-      //}    
+      Session.set('usedSeconds', usedTime.getSeconds());    
       // Call server to reset counter state
-      Meteor.call('clearCounterState');
+      var currentUserId = Meteor.userId();
+      Meteor.call('clearCounterState', currentUserId);
     		Session.set('currentState', 'off'); 
     	} else {
     		Session.set('usedHours', 0);
-			Session.set('usedMinutes', 0);
-			Session.set('usedSeconds', 0); // Will be removed later
+		Session.set('usedMinutes', 0);
+		Session.set('usedSeconds', 0); // Will be removed later
       	// Call method to set counter state
-      	Meteor.call('setCounterState');
+      	var currentUserId = Meteor.userId();
+      	Meteor.call('setCounterState', currentUserId);
     		Session.set('currentState', 'on'); 
     	}
     },
@@ -73,11 +65,11 @@ if (Meteor.isClient) {
     	var usedTimeVar = stopp -startp;
     	var comment = event.target.comment.value;
     	HoursList.insert({
-    				userId: currentUserId,
+    				userId: currentUserId, 
       			start: startp,
       			stop: stopp,
       			usedTime: usedTimeVar,
-               comment: comment
+               	comment: comment
     		});
     }
   });
@@ -89,13 +81,15 @@ if (Meteor.isServer) {
   });
   Meteor.methods({
   	// Set counter state
-  	'setCounterState': function () {
+  	'setCounterState': function (user) {
   		var counterStarted = new Date();
-  		CounterState.insert({previousState: counterStarted});
+  		var currentUserId = user; 
+  		CounterState.insert({userId: currentUserId, previousState: counterStarted});
   	},
   	// Reset counter state
-  	'clearCounterState': function () {
-  		CounterState.remove({});
+  	'clearCounterState': function (user) {
+  		var currentUserId = user;
+  		CounterState.remove({userId: currentUserId});
   	}
   });
 }
