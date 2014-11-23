@@ -12,6 +12,9 @@ if (Meteor.isClient) {
 
   Template.selector.events({
   });
+   //$(function() {
+   // $( "#tabs" ).tabs();
+   // });
 }
 
 if (Meteor.isServer) {
