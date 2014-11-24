@@ -7,6 +7,9 @@ if (Meteor.isClient) {
     },
     'formatDate': function(date) {
   	return moment(date).format('DD.MM.YYYY HH:MM');
+  	},
+  	'formatTime': function(time) {
+  	return moment.utc(time).format('HH:mm:ss');
   	}
   });
 }
