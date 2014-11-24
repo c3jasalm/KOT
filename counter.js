@@ -4,6 +4,7 @@ if (Meteor.isClient) {
 	Session.setDefault('usedHours', 0);
 	Session.setDefault('usedMinutes', 0);
 	Session.setDefault('usedSeconds', 0); // Will be removed later
+	Session.setDefault('counterSave', false);
  
   Template.counter.helpers({
  	'timeStart': function () {
@@ -48,7 +49,8 @@ if (Meteor.isClient) {
       // Call server to reset counter state
       var currentUserId = Meteor.userId();
       Meteor.call('clearCounterState', currentUserId);
-    		Session.set('currentState', 'off'); 
+    	 Session.set('currentState', 'off'); 
+    	 Session.set('counterSave', true);
     	} else {
     		Session.set('usedHours', 0);
 		Session.set('usedMinutes', 0);
@@ -64,13 +66,16 @@ if (Meteor.isClient) {
     	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
     	var comment = event.target.comment.value;
-    	HoursList.insert({
+    	if (Session.get('counterSave')){
+    		HoursList.insert({
     				userId: currentUserId, 
       			start: startp,
       			stop: stopp,
       			usedTime: usedTimeVar,
                	comment: comment
     		});
+    		Session.set('counterSave', false);
+    	}
     }
   });
 }
