@@ -1,16 +1,10 @@
 
 if (Meteor.isClient) {
-
-/*
-  Template.displayHours.helpers({
-
-  });
-
-  Template.selector.events({
-  }); */
-   $(function() {
-    $( "#tabs" ).tabs();
+Template.tabit.rendered = function() {
+    $(function() {
+        $( "#tabs" ).tabs();
     });
+}
 }
 
 if (Meteor.isServer) {
