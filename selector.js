@@ -9,7 +9,10 @@ if (Meteor.isClient) {
 
   	Template.selector.events({
 	'click #datepicker': function() {
-		$('#datepicker').datepicker({weekStart:1, format: "dd.mm.yyyy"});
+		$('#datepicker').datepicker({
+			weekStart:1,
+			format: "dd.mm.yyyy", 
+			endDate: "today",});
 	},
 	'submit form': function (event) {
     		event.preventDefault();
