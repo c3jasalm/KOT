@@ -1,7 +1,11 @@
 <template name="selector">	
 	<form>
-		Date 
-		<input id="datepicker" type="text" name="datepicker" value={{today}}>
+	
+		<div class="input-group datetimepicker">
+			<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			<input type="text" class="set-due-date form-control"/>
+		</div>
+	
 		<!--Done hours
 	      	<select class="hours" name="hoursSelector">
 	     		<option value=0>0</option>

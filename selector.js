@@ -7,14 +7,16 @@ if (Meteor.isClient) {
  		}
 	});
 
-  	Template.selector.events({
-	'click #datepicker': function() {
-		$('#datepicker').datepicker({weekStart:1, format: "dd.mm.yyyy"});
-	},
+  	Template.selector.rendered = function() {
+		$(function() {
+			$('.datetimepicker').datetimepicker();
+		});
+	}
+	Template.selector.events({
 	'submit form': function (event) {
     		event.preventDefault();
     		var currentUserId = Meteor.userId();
-    		var todayVar = Date.parse(event.target.datepicker.value); //Get value from input. Will be replaced with datepicker
+    		var todayVar = Date.parse(event.target.datetimepicker.value); //Get value from input. Will be replaced with datepicker
     		var startVar = new Date(todayVar); // Will be replaced with datepicker
             
             //Get minutes
