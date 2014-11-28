@@ -8,8 +8,8 @@ autopublish
 insecure
 linto:jquery-ui
 mizzao:bootstrap-3
-rajit:bootstrap3-datepicker
 ian:accounts-ui-bootstrap-3
 accounts-github
 mrt:moment
+tsega:bootstrap3-datetimepicker
 
