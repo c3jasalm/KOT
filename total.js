@@ -38,6 +38,12 @@ if (Meteor.isClient) {
     		return Meteor.user().services.github.username;
     	}
   });
+  
+  Template.totalHoursUser.helpers({
+    currentUserName: function () {
+        return Meteor.user().services.github.username;
+    }
+  });
 
   Template.totalHours.events({
   });

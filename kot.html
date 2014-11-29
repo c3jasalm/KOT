@@ -6,10 +6,8 @@
   <p class="headerOne">KOT!</p>
 	<p>{{> loginButtons}}</p>
 	{{#if currentUser}}
-        <p>{{> totalHours}}</p>
+        <p>User: {{> totalHoursUser}} Total Hours: {{> totalHours}}</p>
         <p>{{> tabs}}</p>
-		
-        <!--<p>{{> totalHours}}</p>-->
  		<p>{{> displayHours}}</p>
  		{{else}}
  			<p>Please login! Joku sopiva teksti tähän.</p>

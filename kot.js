@@ -1,6 +1,6 @@
 HoursList = new Mongo.Collection('hours');
 if (Meteor.isClient) {
-   
+
 }
 
 if (Meteor.isServer) {
