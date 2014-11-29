@@ -4,7 +4,10 @@ if (Meteor.isClient) {
  	Template.selector.helpers({
  		'today': function () {	 //Set value to date input
  		return today; 			//.toLocaleDateString(); next step is local time format
- 		}
+ 		},
+ 		'dublicate': function() {
+ 		return Session.get('testDublicate');
+ 	}
 	});
 
 	Template.selector.rendered = function() {
@@ -28,6 +31,18 @@ if (Meteor.isClient) {
             
             //Comment
             var comment = event.target.comment.value;
+          
+          // Check if entry is overlaping with other entry
+		var currentUserId = Meteor.userId();	 
+		if ((HoursList.find({$and: [{userId: currentUserId}, {start: { $lte: startVar }}, {stop: { $gte: startVar}}]}).count())
+		|| (HoursList.find({$and: [{userId: currentUserId}, {start: { $lte: stopVar }}, {stop: { $gte: stopVar}}]}).count())) {
+			Session.set('testDublicate', 'yes');
+		}	
+		else {	
+			Session.set('testDublicate', 'no');
+		};
+	
+      	
             
             //Save to DB
      		HoursList.insert({
