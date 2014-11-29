@@ -23,6 +23,7 @@ if (Meteor.isClient) {
       }
       return hoursStr + ":" + minutesStr;
     },
+    /*
    	totalHoursFloat: function () {
       var total = 0;
       var currentUserId = Meteor.userId();
@@ -33,11 +34,15 @@ if (Meteor.isClient) {
       var hours = totalMinutes / 60;
 
       return hours;
-    },
+    },*/
     	currentUserName: function () {
     		return Meteor.user().services.github.username;
     	}
   });
+  
+    Template.registerHelper("totalHoursFloat",function(){
+      return totalFloat();
+    });
   
   Template.totalHoursUser.helpers({
     currentUserName: function () {
@@ -47,6 +52,21 @@ if (Meteor.isClient) {
 
   Template.totalHours.events({
   });
+  
+  totalFloat = function() {
+      var total = 0;
+      var currentUserId = Meteor.userId();
+      
+      HoursList.find({userId: currentUserId}).map(function(db) {
+        total += parseInt(db.stop - db.start);
+      })
+          
+      var totalMinutes = total / 1000 / 60;
+      var hours = totalMinutes / 60;
+
+      return hours;
+    }
+  
 }
 
 if (Meteor.isServer) {
