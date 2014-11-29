@@ -6,6 +6,9 @@ body{
 .demoHeaders {
     margin-top: 2em;
 }
+.headerOne {
+    font: 200% "Trebuchet MS", sans-serif;
+}
 #dialog-link {
     padding: .4em 1em .4em 20px;
     text-decoration: none;

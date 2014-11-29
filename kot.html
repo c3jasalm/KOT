@@ -3,11 +3,13 @@
 </head>
 
 <body>
-  <h1>KOT!</h1>
+  <p class="headerOne">KOT!</p>
 	<p>{{> loginButtons}}</p>
 	{{#if currentUser}}
+        <p>{{> totalHours}}</p>
         <p>{{> tabs}}</p>
-		<p>{{> totalHours}}</p>
+		
+        <!--<p>{{> totalHours}}</p>-->
  		<p>{{> displayHours}}</p>
  		{{else}}
  			<p>Please login! Joku sopiva teksti tähän.</p>
