@@ -26,8 +26,7 @@ if (Meteor.isClient) {
 		//Comment
 		var comment = event.target.comment.value;
           
-          // Check if entry is overlaping with other entry
-		var currentUserId = Meteor.userId();	 
+          // Check if entry is overlaping with other entry	 
 		if ((HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: startVar }}, {stop: { $gt: startVar}}]}))
 		|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: stopVar }}, {stop: { $gte: stopVar}}]}))
 		|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $gte: startVar }}, {stop: { $lte: stopVar}}]}))) {

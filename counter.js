@@ -67,6 +67,14 @@ if (Meteor.isClient) {
     	var usedTimeVar = stopp -startp;
     	var comment = event.target.comment.value;
     	if (Session.get('counterSave')){
+    	// Check if entry is overlaping with other entry	 
+    		if ((HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: startp }}, {stop: { $gt: startp}}]}))
+			|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: stopp}}, {stop: { $gte: stopp}}]}))
+			|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $gte: startp}}, {stop: { $lte: stopp}}]}))) {
+				// Display alert if there is overlaping
+				alert('Your new entry is overlaping with some other entry');
+		}
+    	else {
     		HoursList.insert({
     				userId: currentUserId, 
       			start: startp,
@@ -77,6 +85,7 @@ if (Meteor.isClient) {
     		Session.set('counterSave', false);
     	}
     }
+    }    
   });
 }
 
