@@ -76,14 +76,14 @@ if (Meteor.isClient) {
 		}
     	else {
     		HoursList.insert({
-    				userId: currentUserId, 
-      			start: startp,
-      			stop: stopp,
-      			usedTime: usedTimeVar,
-               	comment: comment
-    		});
-    		Session.set('counterSave', false);
+    		userId: currentUserId, 
+      	start: startp,
+      	stop: stopp,
+      	usedTime: usedTimeVar,
+          comment: comment
+    		});		
     	}
+    	Session.set('counterSave', false);
     }
     }    
   });
