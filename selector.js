@@ -34,9 +34,11 @@ if (Meteor.isClient) {
           
           // Check if entry is overlaping with other entry
 		var currentUserId = Meteor.userId();	 
-		if ((HoursList.find({$and: [{userId: currentUserId}, {start: { $lte: startVar }}, {stop: { $gte: startVar}}]}).count())
-		|| (HoursList.find({$and: [{userId: currentUserId}, {start: { $lte: stopVar }}, {stop: { $gte: stopVar}}]}).count())) {
+		if ((HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: startVar }}, {stop: { $gt: startVar}}]}))
+		|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: stopVar }}, {stop: { $gte: stopVar}}]}))
+		|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $gte: startVar }}, {stop: { $lte: stopVar}}]}))) {
 			Session.set('testDublicate', 'yes');
+			alert('Your new entry is overlaping with some other entry');
 		}	
 		else {	
 			Session.set('testDublicate', 'no');
