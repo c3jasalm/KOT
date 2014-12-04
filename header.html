@@ -1,9 +1,24 @@
 <template name="header">
-	<div class="bg-info">
-		<p class="headerOne">KOT!</p>
-		{{#if currentUser}}
-			<p>{{> avatar userId=avatarUser shape="rounded"}}</p>
-		{{/if}}
-		<p>{{currentUserName}} {{> loginButtons}}</p><br>
+	<div class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-kot-navbar-collapse-1">
+        	<span class="sr-only">Toggle navigation</span>
+        	<span class="icon-bar"></span>
+        	<span class="icon-bar"></span>
+        	<span class="icon-bar"></span>
+      	</button>
+			<a class="navbar-brand" href="#">KOT!</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-kot-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				{{#if currentUser}}
+					<li>{{> avatar userId=avatarUser shape="rounded"}}</li>
+					<li>{{currentUserName}}</li>
+				{{/if}}
+				<li>{{> loginButtons}}</li>
+			</ul>
+		</div>
+		</div>
 	</div>
 </template>
