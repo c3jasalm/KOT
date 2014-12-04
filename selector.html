@@ -1,29 +1,42 @@
 <template name="selector">	
+
 	<form>
-		Date 
-		<div class='col-sm-2'>
+	<div class="row">
+	<div class="form-group">
+		<div class='col-md-3'>
+		<label>Task started</label>
  			<div class="input-group datetimepicker">
     				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     				<input class="set-due-date form-control" type="text" name="dtPicker" readonly="readonly"/>
  			</div>
   		</div>
-		
-        Hours done:
-      		<select class="hours" name="timeSelector">
+		<div class='col-md-2'>
+			<label>Time used</label><br>
+      	<select name="timeSelector">
      		<option value=15>00:15</option>
   			<option value=30>00:30</option>
   			<option value=45>00:45</option>
   			<option value=60>01:00</option>
-            <option value=75>01:15</option>
+			<option value=75>01:15</option>
   			<option value=90>01:30</option>
   			<option value=105>01:45</option>
   			<option value=120>02:00</option>
-            <option value=135>02:15</option>
+         <option value=135>02:15</option>
   			<option value=150>02:30</option>
   			<option value=165>02:45</option>
   			<option value=180>03:00</option>
-		</select>
-        <input type="text" name="comment" placeholder="Comment" />
+			</select>
+		</div>
+		<div class='col-md-5'>
+			<label>Task description</label>
+        <input class="form-control" type="text" name="comment"/>
+        </div>
+        <div class='col-md-2'>
+        <label>Save task</label><br>
 		<input type="submit" value="Submit">
+		</div>
+		</div>
+		</div>
 	</form>
+	
 </template>		

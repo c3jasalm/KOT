@@ -1,7 +1,9 @@
 <template name="displayHours">
+<div class="jumbotron">
 	{{#if currentUser}}
 		{{#each previousHours}}
   			<li>Task started: {{formatDate start}} 	ended: {{formatDate stop}} Used time: {{formatTime usedTime}} - {{comment}}</li>
 		{{/each}}
 	{{/if}}
+	</div>
 </template>
