@@ -3,6 +3,7 @@
 </head>
 
 <body>
+<div class="container">
   {{> header}}
 	{{#if currentUser}}
         <p>User: {{> totalHoursUser}} Total Hours: {{> totalHours}}</p>
@@ -11,6 +12,7 @@
  		{{else}}
  			<p>Please login! Joku sopiva teksti tähän.</p>
  	{{/if}}
+</div>
 </body>
 
 
