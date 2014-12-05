@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse" id="bs-kot-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				{{#if currentUser}}
-					<li>{{> avatar userId=avatarUser shape="rounded"}}</li>
+					<li><img src={{avatarUser}} alt="avatar" height="42" width="42"></li>
 					<li>{{currentUserName}}</li>
 				{{/if}}
 				<li>{{> loginButtons}}</li>
