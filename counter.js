@@ -5,7 +5,7 @@ if (Meteor.isClient) {
 	Session.setDefault('usedMinutes', 0);
 	Session.setDefault('usedSeconds', 0); // Will be removed later
 	Session.setDefault('counterSave', false);
-	Session.set('startStopColor', 'btn btn-success');
+	Session.setDefault('startStopColor', 'btn btn-success');
  
   Template.counter.helpers({
  	'timeStart': function () {
