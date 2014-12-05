@@ -1,12 +1,29 @@
 <template name="counter">
-	<p>Counter is {{currentState}}</p>
 	<form>
-  <button id="startStop">Start / Stop</button>
-  <p>Counter started at: {{timeStart}}</p>
-  <p>Used time
-  	<br>hours: {{timeHours}}    minutes: {{timeMinutes}}    seconds: {{timeSeconds}}
-  	<input type="text" name="comment" placeholder="Comment" />
-	<input type="submit" value="Submit">
-  </p>
+		<div class="form-group">
+			<label>Counter is</label> {{currentState}}
+			<div class="row">
+				<div class='col-md-4'>
+  					<button id="startStop" class={{startStopColor}}>Start / Stop</button>
+  				</div>
+  				<div class='col-md-6'>
+  					<label>Counter started at:</label> {{timeStart}}
+  				</div>
+  			</div><br>
+  			<div class="row">
+  				<div class='col-md-4'>
+  				<label>Used time</label><br>
+  					hours: {{timeHours}}    minutes: {{timeMinutes}}    seconds: {{timeSeconds}}
+  				</div>
+  				<div class='col-md-4'>
+  					<label>Task description</label><br>
+  					<input type="text" name="comment" placeholder="Comment" />
+  				</div>
+				<div class='col-md-4'>	
+					<label>Save task</label><br>				
+					<input type="submit" class="btn btn-primary" value="Submit">
+ 				</div>
+  			</div>
+  		</div>
   </form>
 </template>

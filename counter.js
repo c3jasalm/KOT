@@ -5,6 +5,7 @@ if (Meteor.isClient) {
 	Session.setDefault('usedMinutes', 0);
 	Session.setDefault('usedSeconds', 0); // Will be removed later
 	Session.setDefault('counterSave', false);
+	Session.set('startStopColor', 'btn btn-success');
  
   Template.counter.helpers({
  	'timeStart': function () {
@@ -31,6 +32,9 @@ if (Meteor.isClient) {
  	},
  	'currentState': function () {
  			return Session.get('currentState');
+ 	},
+ 	'startStopColor': function () {
+ 			return Session.get('startStopColor');
  	}
 });
 
@@ -51,6 +55,7 @@ if (Meteor.isClient) {
       Meteor.call('clearCounterState', currentUserId);
     	 Session.set('currentState', 'off'); 
     	 Session.set('counterSave', true);
+    	 Session.set('startStopColor', 'btn btn-success');
     	} else {
     		Session.set('usedHours', 0);
 		Session.set('usedMinutes', 0);
@@ -59,6 +64,7 @@ if (Meteor.isClient) {
       	var currentUserId = Meteor.userId();
       	Meteor.call('setCounterState', currentUserId);
     		Session.set('currentState', 'on'); 
+    		Session.set('startStopColor', 'btn btn-danger');
     	}
     },
     'submit form': function (event) {
