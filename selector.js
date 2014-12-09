@@ -37,11 +37,12 @@ if (Meteor.isClient) {
 			//Save to DB if no overlaping
      		HoursList.insert({
      			userId: currentUserId,
+                ghUserId: Meteor.user().services.github.username,
       			start: startVar,
       			stop: stopVar,
       			usedTime: usedTimeVar,
-                	comment: comment
-    			});
+                comment: comment
+    		});
 		};
     	}
   	});

@@ -1,17 +1,43 @@
 if (Meteor.isClient) {
 
   Template.topList.helpers({
-    'previousHours': function () {
-    	var currentUserId = Meteor.userId();
-      return HoursList.find({userId: currentUserId}, {sort: {start: -1} })
-    },
-    'formatDate': function(date) {
-  	return moment(date).format('DD.MM.YYYY HH:mm');
-  	},
-  	'formatTime': function(time) {
-  	return moment.utc(time).format('HH:mm:ss');
-  	}
+    'topList': function () {
+        var usersHours = [];
+        var uniqueUsers = listUniqueUsers();
+        //return listUniqueUsers();
+        uniqueUsers.forEach(function(user) {
+            console.log("CountFor: " + user);
+            var userHours = countHoursForUser(user);
+            usersHours.push("User: " + user + " Hours: " + userHours);
+        });
+        return usersHours;
+    }
   });
+  
+  listUniqueUsers = function() {
+    var users = [];
+    HoursList.find().map(function(db) {
+        if (users.indexOf(String(db.ghUserId)) === -1) {
+            users.push(String(db.ghUserId));
+        }
+    })
+    console.log(users.toString());
+    return users;
+  }
+  
+  countHoursForUser = function(userName) {
+    var total = 0;
+      
+    HoursList.find({ghUserId: userName}).map(function(db) {
+      total += parseInt(db.stop - db.start);
+    })
+       
+    var totalMinutes = total / 1000 / 60;
+    var hours = totalMinutes / 60;
+
+    return hours;
+  }
+  
 }
 
 if (Meteor.isServer) {

@@ -91,11 +91,12 @@ if (Meteor.isClient) {
 		} 
     	else {
     		HoursList.insert({
-    		userId: currentUserId, 
-      	start: startp,
-      	stop: stopp,
-      	usedTime: usedTimeVar,
-          comment: comment
+                userId: currentUserId, 
+                ghUserId: Meteor.user().services.github.username,
+                start: startp,
+                stop: stopp,
+                usedTime: usedTimeVar,
+                comment: comment
     		});		
     	}
     	Session.set('counterSave', false);
