@@ -6,6 +6,7 @@ if (Meteor.isClient) {
 	Session.setDefault('usedSeconds', 0); // Will be removed later
 	Session.setDefault('counterSave', false);
 	Session.setDefault('startStopColor', 'btn btn-success');
+	Session.setDefault('submitStatus', 'disabled');
  
   Template.counter.helpers({
  	'timeStart': function () {
@@ -13,8 +14,11 @@ if (Meteor.isClient) {
  		start = CounterState.findOne({userId: currentUserId});
  		if (start) {						// Set current counter state
  			Session.set('currentState', 'on'); 
+ 			Session.set('startStopColor', 'btn btn-danger');
+ 			Session.set('submitStatus', 'disabled');
  		} else {
  			Session.set('currentState', 'off');
+ 			Session.set('startStopColor', 'btn btn-success');
  		}
     	return start.previousState;
  	},
@@ -35,6 +39,9 @@ if (Meteor.isClient) {
  	},
  	'startStopColor': function () {
  			return Session.get('startStopColor');
+ 	},
+ 	'submitStatus': function () {
+ 			return Session.get('submitStatus');
  	}
 });
 
@@ -56,6 +63,7 @@ if (Meteor.isClient) {
     	 Session.set('currentState', 'off'); 
     	 Session.set('counterSave', true);
     	 Session.set('startStopColor', 'btn btn-success');
+    	 Session.set('submitStatus', 'enabled');
     	} else {
     		Session.set('usedHours', 0);
 		Session.set('usedMinutes', 0);
@@ -65,6 +73,7 @@ if (Meteor.isClient) {
       	Meteor.call('setCounterState', currentUserId);
     		Session.set('currentState', 'on'); 
     		Session.set('startStopColor', 'btn btn-danger');
+    		Session.set('submitStatus', 'disabled');
     	}
     },
     'submit form': function (event) {
@@ -79,7 +88,7 @@ if (Meteor.isClient) {
 			|| (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $gte: startp}}, {stop: { $lte: stopp}}]}))) {
 				// Display alert if there is overlaping
 				alert('Your new entry is overlaping with some other entry');
-		}
+		} 
     	else {
     		HoursList.insert({
     		userId: currentUserId, 
@@ -90,6 +99,7 @@ if (Meteor.isClient) {
     		});		
     	}
     	Session.set('counterSave', false);
+    	Session.set('submitStatus', 'disabled');
     }
     }    
   });
