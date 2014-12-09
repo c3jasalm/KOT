@@ -3,7 +3,7 @@ if (Meteor.isClient) {
   Template.displayHours.helpers({
     'previousHours': function () {
     	var currentUserId = Meteor.userId();
-      return HoursList.find()
+      return HoursList.find({userId: currentUserId}, {sort: {start: -1} })
     },
     'formatDate': function(date) {
   	return moment(date).format('DD.MM.YYYY HH:mm');
