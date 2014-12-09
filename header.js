@@ -7,8 +7,9 @@ if (Meteor.isClient) {
 		},
 		'currentUserName': function () {
 		return Meteor.user().services.github.username;
-    	},
-    	'currentUserRealName': function () {
+    	}
+	});
+    Template.registerHelper("currentUserRealName",function(){
     	var pathVar = Meteor.user().services.github.username;
     	var apiPath = "https://api.github.com/users/" + pathVar;
     	
@@ -17,6 +18,5 @@ if (Meteor.isClient) {
       	Session.set('realName', fullName.name);
     	});
 		return Session.get('realName');
-		}
-	});
+    });
 }
