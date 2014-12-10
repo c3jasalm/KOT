@@ -8,9 +8,12 @@ if (Meteor.isClient) {
         uniqueUsers.forEach(function(user) {
             console.log("CountFor: " + user);
             var userHours = countHoursForUser(user);
-            usersHours.push("User: " + user + " Hours: " + userHours);
+            usersHours.push({id:user, hours:userHours});
         });
-        return usersHours;
+        console.log("Array: " + usersHours[0]["id"]);
+        //return usersHours;
+        var sorted = _.sortBy(usersHours, 'hours');
+        return sorted.reverse();
     }
   });
   
