@@ -11,6 +11,7 @@ if (Meteor.isClient) {
 	Meteor.setInterval(function () {
 		Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
 		Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
+		Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
 	},1000);
  
   Template.counter.helpers({
@@ -31,13 +32,28 @@ if (Meteor.isClient) {
  		return Session.get('stop');
  	},
  	'timeHours': function () {
- 		return Session.get('usedHours');
+ 		var state = Session.get('currentState');
+ 		if (state == 'on') {
+ 			return Session.get('counterHours');
+ 			} else {
+ 				return Session.get('usedHours');
+ 			}
  	},
  	'timeMinutes': function () {
- 		return Session.get('usedMinutes');
+ 		var state = Session.get('currentState');
+ 		if (state == 'on') {
+ 			return Session.get('counterMinutes');
+ 			} else {
+ 				return Session.get('usedMinutes');
+ 			}
  	},
  	'timeSeconds': function () {				// Will be removed later
- 		return Session.get('usedSeconds');
+ 		var state = Session.get('currentState');
+ 		if (state == 'on') {
+ 			return Session.get('counterSeconds');
+ 			} else {
+ 				return Session.get('usedSeconds');
+ 		}
  	},
  	'currentState': function () {
  			return Session.get('currentState');
@@ -47,18 +63,6 @@ if (Meteor.isClient) {
  	},
  	'submitStatus': function () {
  			return Session.get('submitStatus');
- 	},
- 	'counterSeconds': function () {
- 		var state = Session.get('startStopColor');
- 		if (state == 'btn btn-danger') {
- 			return Session.get('counterSeconds');
- 			}
- 	},
- 	'counterMinutes': function () {
- 		var state = Session.get('startStopColor');
- 		if (state == 'btn btn-danger') {
- 			return Session.get('counterMinutes');
- 			}
  	}
 });
 
