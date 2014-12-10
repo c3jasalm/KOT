@@ -7,6 +7,11 @@ if (Meteor.isClient) {
 	Session.setDefault('counterSave', false);
 	Session.setDefault('startStopColor', 'btn btn-success');
 	Session.setDefault('submitStatus', 'disabled');
+	
+	Meteor.setInterval(function () {
+		Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
+		Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
+	},1000);
  
   Template.counter.helpers({
  	'timeStart': function () {
@@ -42,6 +47,18 @@ if (Meteor.isClient) {
  	},
  	'submitStatus': function () {
  			return Session.get('submitStatus');
+ 	},
+ 	'counterSeconds': function () {
+ 		var state = Session.get('startStopColor');
+ 		if (state == 'btn btn-danger') {
+ 			return Session.get('counterSeconds');
+ 			}
+ 	},
+ 	'counterMinutes': function () {
+ 		var state = Session.get('startStopColor');
+ 		if (state == 'btn btn-danger') {
+ 			return Session.get('counterMinutes');
+ 			}
  	}
 });
 
@@ -74,6 +91,7 @@ if (Meteor.isClient) {
     		Session.set('currentState', 'on'); 
     		Session.set('startStopColor', 'btn btn-danger');
     		Session.set('submitStatus', 'disabled');
+    		counterStarted = new Date();
     	}
     },
     'submit form': function (event) {

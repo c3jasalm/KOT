@@ -3,10 +3,13 @@
 		<div class="form-group">
 			<label>Counter is</label> {{currentState}}
 			<div class="row">
-				<div class='col-md-4'>
+				<div class='col-md-2'>
   					<button id="startStop" class={{startStopColor}}>Start / Stop</button>
   				</div>
-  				<div class='col-md-6'>
+  				<div class='col-md-2'>
+  					{{counterMinutes}}:{{counterSeconds}}
+  				</div>
+  				<div class='col-md-8'>
   					<label>Counter started at:</label> {{timeStart}}
   				</div>
   			</div><br>
