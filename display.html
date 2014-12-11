@@ -1,10 +1,19 @@
 <template name="displayHours">
 <div class="jumbotron">
+	
+	<div class="checkbox">
+		<label>
+      	<input id="showDelete" type="checkbox"> Show delete
+      </label>
+  	</div>
+  	
 	{{#if currentUser}}
 		<ul class="list-unstyled">
 		{{#each previousHours}}
   			<li>
-  			<button class="delete btn btn-danger btn-xs">x</button>
+  			{{#if isChecked}}
+  				<button class="delete btn btn-danger btn-xs">x</button>
+  			{{/if}}
   			Task started: {{formatDate start}} 	ended: {{formatDate stop}} Used time: {{formatTime usedTime}} - {{comment}}
   			</li>
 		{{/each}}

@@ -10,7 +10,10 @@ if (Meteor.isClient) {
   	},
   	'formatTime': function(time) {
   	return moment.utc(time).format('HH:mm:ss');
-  	}
+  	},
+  	'isChecked': function () {
+    return Session.get("isChecked");
+  }
   });
   
   Template.displayHours.events({
@@ -18,7 +21,10 @@ if (Meteor.isClient) {
   			if(confirm('You are going to delete entry. Are you sure?')) {
     			HoursList.remove(this._id);
     		}
-  		}
+  		},
+  		'change #showDelete': function (event) {
+  			Session.set("isChecked", event.target.checked);
+ 		}
 	});
 
 }
