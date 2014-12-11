@@ -12,7 +12,17 @@ if (Meteor.isClient) {
   	return moment.utc(time).format('HH:mm:ss');
   	}
   });
+  
+  Template.displayHours.events({
+  		'click .delete': function () {
+  			if(confirm('You are going to delete entry. Are you sure?')) {
+    			HoursList.remove(this._id);
+    		}
+  		}
+	});
+
 }
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
