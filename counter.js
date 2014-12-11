@@ -91,7 +91,8 @@ if (Meteor.isClient) {
 		Session.set('usedSeconds', 0); // Will be removed later
       	// Call method to set counter state
       	var currentUserId = Meteor.userId();
-      	Meteor.call('setCounterState', currentUserId);
+      	var counterStart = new Date();
+      	Meteor.call('setCounterState', currentUserId, counterStart);
     		Session.set('currentState', 'on'); 
     		Session.set('startStopColor', 'btn btn-danger');
     		Session.set('submitStatus', 'disabled');
@@ -134,8 +135,8 @@ if (Meteor.isServer) {
   });
   Meteor.methods({
   	// Set counter state
-  	'setCounterState': function (user) {
-  		var counterStarted = new Date();
+  	'setCounterState': function (user, start) {
+  		var counterStarted = start;
   		var currentUserId = user; 
   		CounterState.insert({userId: currentUserId, previousState: counterStarted});
   	},
