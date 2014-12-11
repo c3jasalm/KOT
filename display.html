@@ -1,12 +1,14 @@
 <template name="displayHours">
 <div class="jumbotron">
 	{{#if currentUser}}
+		<ul class="list-unstyled">
 		{{#each previousHours}}
   			<li>
-  			<button class="delete btn btn-danger">x</button>
+  			<button class="delete btn btn-danger btn-xs">x</button>
   			Task started: {{formatDate start}} 	ended: {{formatDate stop}} Used time: {{formatTime usedTime}} - {{comment}}
   			</li>
 		{{/each}}
+		</ul>
 	{{/if}}
 	</div>
 </template>
