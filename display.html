@@ -8,15 +8,28 @@
   	</div>
   	
 	{{#if currentUser}}
-		<ul class="list-unstyled">
+		<div class="row">
+			<div class='col-xs-1'></div> 
+			<div class='col-xs-3'><label>Task started</label></div>
+			<div class='col-xs-3'><label>Time used</label></div>
+			<div class='col-xs-4'><label>Task</label></div>
+		</div>
+		<ul class="list-unstyled">	
 		{{#each previousHours}}
+		<div class="row">
   			<li>
+  			<div class='col-xs-1'>
   			{{#if isChecked}}
   				<button class="delete btn btn-danger btn-xs">x</button>
   			{{/if}}
-  			Task started: {{formatDate start}} 	ended: {{formatDate stop}} Used time: {{formatTime usedTime}} - {{comment}}
+  			</div>
+  				<div class='col-xs-3'>{{formatDate start}}</div> 
+  				<div class='col-xs-3'>{{formatTime usedTime}}</div> 
+  				<div class='col-xs-4'>{{comment}}</div>
   			</li>
+  			</div>
 		{{/each}}
+		
 		</ul>
 	{{/if}}
 	</div>
