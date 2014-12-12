@@ -10,9 +10,9 @@
 	{{#if currentUser}}
 		<div class="row">
 			<div class='col-xs-1'></div> 
-			<div class='col-xs-3'><label>Task started</label></div>
+			<div class='col-xs-4'><label>Task started</label></div>
 			<div class='col-xs-3'><label>Time used</label></div>
-			<div class='col-xs-4'><label>Task</label></div>
+			<div class='col-xs-3'><label>Task</label></div>
 		</div>
 		<ul class="list-unstyled">	
 		{{#each previousHours}}
@@ -23,9 +23,9 @@
   				<button class="delete btn btn-danger btn-xs">x</button>
   			{{/if}}
   			</div>
-  				<div class='col-xs-3'>{{formatDate start}}</div> 
+  				<div class='col-xs-4'>{{formatDate start}}</div> 
   				<div class='col-xs-3'>{{formatTime usedTime}}</div> 
-  				<div class='col-xs-4'>{{comment}}</div>
+  				<div class='col-xs-3'>{{comment}}</div>
   			</li>
   			</div>
 		{{/each}}
