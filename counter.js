@@ -7,6 +7,7 @@ if (Meteor.isClient) {
 	Session.setDefault('counterSave', false);
 	Session.setDefault('startStopColor', 'btn btn-success');
 	Session.setDefault('submitStatus', 'disabled');
+	Session.set('glyphicon', 'glyphicon glyphicon-play');
 	
 	Meteor.setInterval(function () {
 		Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
@@ -21,10 +22,12 @@ if (Meteor.isClient) {
  		if (start) {						// Set current counter state
  			Session.set('currentState', 'on'); 
  			Session.set('startStopColor', 'btn btn-danger');
+ 			Session.set('glyphicon', 'glyphicon glyphicon-stop');
  			Session.set('submitStatus', 'disabled');
  		} else {
  			Session.set('currentState', 'off');
  			Session.set('startStopColor', 'btn btn-success');
+ 			Session.set('glyphicon', 'glyphicon glyphicon-play');
  		}
     	return start.previousState;
  	},
@@ -63,6 +66,9 @@ if (Meteor.isClient) {
  	},
  	'submitStatus': function () {
  			return Session.get('submitStatus');
+ 	},
+ 	'glyphicon': function () {
+ 			return Session.get('glyphicon');
  	}
 });
 
@@ -85,6 +91,7 @@ if (Meteor.isClient) {
     	 Session.set('counterSave', true);
     	 Session.set('startStopColor', 'btn btn-success');
     	 Session.set('submitStatus', 'enabled');
+    	 Session.set('glyphicon', 'glyphicon glyphicon-play');
     	} else {
     		Session.set('usedHours', 0);
 		Session.set('usedMinutes', 0);
@@ -96,6 +103,7 @@ if (Meteor.isClient) {
     		Session.set('currentState', 'on'); 
     		Session.set('startStopColor', 'btn btn-danger');
     		Session.set('submitStatus', 'disabled');
+    		Session.set('glyphicon', 'glyphicon glyphicon-stop');
     		counterStarted = new Date();
     	}
     },
