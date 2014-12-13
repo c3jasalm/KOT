@@ -29,7 +29,7 @@ if (Meteor.isClient) {
  			Session.set('startStopColor', 'btn btn-success');
  			Session.set('glyphicon', 'glyphicon glyphicon-play');
  		}
-    	return start.previousState;
+    	return moment(start.previousState).format('DD.MM.YYYY HH:mm');
  	},
  	'timeStop': function () {
  		return Session.get('stop');
@@ -69,7 +69,10 @@ if (Meteor.isClient) {
  	},
  	'glyphicon': function () {
  			return Session.get('glyphicon');
- 	}
+ 	},
+ 	'formatDate': function(date) {
+  	return moment(date).format('DD.MM.YYYY HH:mm');
+  	}
 });
 
   Template.counter.events({
