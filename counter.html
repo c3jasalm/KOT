@@ -2,18 +2,19 @@
 	<form>
 		<div class="form-group">
 			<div class="row">
-				<div class='col-md-2'>
-					<label>Clock is {{currentState}}</label> <br>
-  					<button id="startStop" class="{{startStopColor}} btn">
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class={{glyphicon}} aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;			
-  					</button>
+				<!--<div class='col-md-2'>
+				</div>-->
+				<div class='col-md-4'>
+					<label>Clock started:</label><br>{{timeStart}}
   				</div>
 			</div>
   			<br>	
   			<div class="row">
   				<div class='col-md-2'>
-  					<label>Clock started:</label><br>
-  					{{timeStart}}
+  					<label>Clock is {{currentState}}</label> <br>
+  					<button id="startStop" class="{{startStopColor}} btn">
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class={{glyphicon}} aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;			
+  					</button>
   				</div>
   				<div class='col-md-3'>
   					<label>Time used</label><br>
