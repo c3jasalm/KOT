@@ -1,4 +1,5 @@
 HoursList = new Mongo.Collection('hours');
+userInformation = new Mongo.Collection('userInfo');
 if (Meteor.isClient) {
 
 }
