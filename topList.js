@@ -44,7 +44,7 @@ if (Meteor.isClient) {
     var totalMinutes = total / 1000 / 60;
     var hours = totalMinutes / 60;
 
-    return hours;
+    return Math.round(hours * 100) / 100;
   }
 }
 
