@@ -14,20 +14,19 @@ if (Meteor.isClient) {
             var realName = getUsersRealName();
             console.log("REAL: " + realName);
             
+            //Alert if name is not set
+            if (typeof(realName) === "undefined") {
+                realName = " ";
+                alert('Name not set in GitHub account. Please set.');
+            }
+            
+            //If user exists update, otherwise add
             if (current) {
                 console.log("UPDATE");
-                if (typeof(realName) === "undefined") {
-                    realName = " ";
-                    alert('Name not set in GitHub account. Please set.');
-                }
                 var newInfo = {name: realName};
                 userInformation.update( {_id: currentUserId}, { $set: newInfo });
             } else {
                 console.log("ADD");
-                if (typeof(realName) === "undefined") {
-                    realName = " ";
-                    alert('Name not set in GitHub account. Please set.');
-                }
                 userInformation.insert({
                     _id: currentUserId,
                     name: realName
