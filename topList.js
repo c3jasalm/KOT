@@ -4,14 +4,20 @@ if (Meteor.isClient) {
     'topList': function () {
         var usersHours = [];
         var uniqueUsers = listUniqueUsers();
-        //return listUniqueUsers();
+        
         uniqueUsers.forEach(function(user) {
             console.log("CountFor: " + user);
             var userHours = countHoursForUser(user);
-            usersHours.push({id:user, hours:userHours});
+            var realUserName;
+            
+            userInformation.find({_id: user}).map(function(db) {
+              realUserName = db.name;
+            })
+            
+            usersHours.push({id:user, hours:userHours, realName:realUserName});
         });
         console.log("Array: " + usersHours[0]["id"]);
-        //return usersHours;
+        
         var sorted = _.sortBy(usersHours, 'hours');
         return sorted.reverse();
     }
@@ -38,9 +44,12 @@ if (Meteor.isClient) {
     var totalMinutes = total / 1000 / 60;
     var hours = totalMinutes / 60;
 
-    return hours;
+    return precise_round(hours, 2);
   }
-  
+  function precise_round(num, decimals) {
+    var t=Math.pow(10, decimals);   
+    return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+  }
 }
 
 if (Meteor.isServer) {
