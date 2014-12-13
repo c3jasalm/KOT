@@ -1,7 +1,21 @@
 <template name="topList">
-
+    <div class="row">
+        <div class='col-xs-3'><label>User</label></div>
+        <div class='col-xs-2'><label>Team</label></div>
+        <div class='col-xs-1'><label>Hours</label></div>
+        <div class='col-xs-1'><label>Commits</label></div>
+    </div>
+    <ul class="list-unstyled">
     {{#each topList}}
-        <p>{{realName}} ({{id}}) - {{hours}} hours</p>
+   		<div class="row">
+  			<li>
+  				<div class='col-xs-3'>{{realName}} ({{id}})</div> 
+  				<div class='col-xs-2'></div> 
+                <div class='col-xs-1'>{{hours}}</div>
+  				<div class='col-xs-1'></div>
+  			</li>
+		</div>
     {{/each}}
+    </ul>
 
 </template>
