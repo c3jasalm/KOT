@@ -1,6 +1,6 @@
 <template name="selector">	
 
-	<form>
+	<form role="form">
 	<div class="row">
 	<div class="form-group">
 		<div class='col-md-3'>
@@ -12,7 +12,7 @@
   		</div>
 		<div class='col-md-2'>
 			<label>Time used</label><br>
-      	<select name="timeSelector">
+      	<select class="form-control" name="timeSelector">
      		<option value=15>00:15</option>
   			<option value=30>00:30</option>
   			<option value=45>00:45</option>
@@ -29,7 +29,7 @@
 		</div>
 		<div class='col-md-5'>
 			<label>Task description</label>
-        <input class="form-control" type="text" name="comment"/>
+        <input class="form-control" type="text" name="comment" required/>
         </div>
         <div class='col-md-2'>
         <label>Save task</label><br>
