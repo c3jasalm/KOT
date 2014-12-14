@@ -40,6 +40,12 @@
 .fakewindowcontain .ui-widget-overlay {
     position: absolute;
 }
+.jumbotron {
+ color: #555555;
+ border-color: #555555;
+ border-style: solid;
+ border-width: 1px;	
+}
 /* select {
     width: 200px;
 } */
