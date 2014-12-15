@@ -114,11 +114,12 @@ if (Meteor.isClient) {
     	event.preventDefault();
     	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
-    	var quarter = 1000 * 60 * 15; // 15 minutes
-    	if (usedTimeVar < 1000 * 60 * 5
-    		|| usedTimeVar > 1000 * 60 * 15 && usedTimeVar < 1000 * 60 * 20
-    		|| usedTimeVar > 1000 * 60 * 30 && usedTimeVar < 1000 * 60 * 35
-    		|| usedTimeVar > 1000 * 60 * 45 && usedTimeVar < 1000 * 60 * 50) {
+    	var quarter = 1000 * 1 * 15; // 15 minutes
+    	var usedMinutesVar = new Date(usedTimeVar).getMinutes();
+    	if (usedMinutesVar < 5
+    		|| usedMinutesVar > 15 && usedMinutesVar < 20
+    		|| usedMinutesVar > 30 && usedMinutesVar < 35
+    		|| usedMinutesVar > 45 && usedMinutesVar < 50) {
     		var roundedTime =  (Math.floor(usedTimeVar / quarter) * quarter);
     	} else {
     			var roundedTime =  (Math.ceil(usedTimeVar / quarter) * quarter);
