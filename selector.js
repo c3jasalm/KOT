@@ -5,7 +5,7 @@ if (Meteor.isClient) {
 	});
 
 	Template.selector.rendered = function() {
-    $('.datetimepicker').datetimepicker({maxDate: new Date(), minuteStepping:5, format: 'MM/DD/YYYY HH:mm', defaultDate: new Date()});
+    $('.datetimepicker').datetimepicker({maxDate: new Date(), minuteStepping:15, format: 'MM/DD/YYYY HH:mm', defaultDate: new Date()});
     };
     
   	Template.selector.events({

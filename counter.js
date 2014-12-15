@@ -114,6 +114,8 @@ if (Meteor.isClient) {
     	event.preventDefault();
     	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
+    	var quarter = 1000 * 60 * 15;
+    	var roundedTime =  (Math.round(usedTimeVar / quarter) * quarter);
     	var comment = event.target.comment.value;
     	if (Session.get('counterSave')){
     	// Check if entry is overlaping with other entry	 
@@ -129,7 +131,7 @@ if (Meteor.isClient) {
                 ghUserId: Meteor.user().services.github.username,
                 start: startp,
                 stop: stopp,
-                usedTime: usedTimeVar,
+                usedTime: roundedTime,
                 comment: comment
     		});		
     	}
