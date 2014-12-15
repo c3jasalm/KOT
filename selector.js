@@ -41,7 +41,8 @@ if (Meteor.isClient) {
       			start: startVar,
       			stop: stopVar,
       			usedTime: usedTimeVar,
-                comment: comment
+               comment: comment,
+					inputType: 'selector'
     		});
 		};
     	}

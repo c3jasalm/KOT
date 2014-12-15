@@ -132,7 +132,8 @@ if (Meteor.isClient) {
                 start: startp,
                 stop: stopp,
                 usedTime: roundedTime,
-                comment: comment
+                comment: comment,
+                inputType: 'counter'
     		});		
     	}
     	Session.set('counterSave', false);
