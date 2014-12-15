@@ -114,8 +114,15 @@ if (Meteor.isClient) {
     	event.preventDefault();
     	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
-    	var quarter = 1000 * 60 * 15;
-    	var roundedTime =  (Math.round(usedTimeVar / quarter) * quarter);
+    	var quarter = 1000 * 60 * 15; // 15 minutes
+    	if (usedTimeVar < 1000 * 60 * 5
+    		|| usedTimeVar > 1000 * 60 * 15 && usedTimeVar < 1000 * 60 * 20
+    		|| usedTimeVar > 1000 * 60 * 30 && usedTimeVar < 1000 * 60 * 35
+    		|| usedTimeVar > 1000 * 60 * 45 && usedTimeVar < 1000 * 60 * 50) {
+    		var roundedTime =  (Math.floor(usedTimeVar / quarter) * quarter);
+    	} else {
+    			var roundedTime =  (Math.ceil(usedTimeVar / quarter) * quarter);
+    		}
     	var comment = event.target.comment.value;
     	if (Session.get('counterSave')){
     	// Check if entry is overlaping with other entry	 
