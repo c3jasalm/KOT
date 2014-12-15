@@ -114,7 +114,7 @@ if (Meteor.isClient) {
     	event.preventDefault();
     	var currentUserId = Meteor.userId();
     	var usedTimeVar = stopp -startp;
-    	var quarter = 1000 * 1 * 15; // 15 minutes
+    	var quarter = 1000 * 60 * 15; // 15 minutes
     	var usedMinutesVar = new Date(usedTimeVar).getMinutes();
     	if (usedMinutesVar < 5
     		|| usedMinutesVar > 15 && usedMinutesVar < 20
