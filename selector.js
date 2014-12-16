@@ -42,7 +42,7 @@ if (Meteor.isClient) {
       			stop: stopVar,
       			usedTime: usedTimeVar,
                comment: comment,
-					inputType: 'selector'
+					inputType: true
     		});
 		};
     	}

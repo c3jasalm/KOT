@@ -6,10 +6,10 @@ if (Meteor.isClient) {
       return HoursList.find({userId: currentUserId}, {sort: {start: -1} })
     },
     'formatDate': function(date) {
-  	return moment(date).format('DD.MM.YYYY HH:mm');
+  	return moment(date).format('DD.MM.');
   	},
   	'formatTime': function(time) {
-  	return moment.utc(time).format('HH:mm:ss');
+  	return moment.utc(time).format('HH:mm');
   	},
   	'isChecked': function () {
     return Session.get("isChecked");
