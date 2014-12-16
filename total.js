@@ -6,7 +6,8 @@ if (Meteor.isClient) {
       var total = 0;
       var currentUserId = Meteor.userId();
       HoursList.find({userId: currentUserId}).map(function(db) {
-        total += parseInt(db.stop - db.start);
+        //total += parseInt(db.stop - db.start);
+        total += parseInt(db.usedTime);
           })
       var totalMinutes = total / 1000 / 60;
       var hours = parseInt(totalMinutes / 60);
@@ -58,7 +59,8 @@ if (Meteor.isClient) {
       var currentUserId = Meteor.userId();
       
       HoursList.find({userId: currentUserId}).map(function(db) {
-        total += parseInt(db.stop - db.start);
+        //total += parseInt(db.stop - db.start);
+        total += parseInt(db.usedTime);
       })
           
       var totalMinutes = total / 1000 / 60;
