@@ -15,7 +15,7 @@ if (Meteor.isClient) {
             console.log("REAL: " + realName);
             
             //Alert if name is not set
-            if (typeof(realName) === "undefined") {
+            if (realName === "") {
                 realName = " ";
                 alert('Name not set in GitHub account. Please set.');
             }
