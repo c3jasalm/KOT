@@ -11,7 +11,20 @@ if (Meteor.isClient) {
     	}
 	});
     Template.registerHelper("currentUserRealName",function(){
-    	return Session.get('realName');
+        console.log("CURN: " + Session.get('realName'));
+        if (typeof(Session.get('realName')) === 'undefined')
+        {
+            console.log("Use DB");
+            var currentUserId = Meteor.user().services.github.username;
+            console.log("CURN ID: " + currentUserId);
+            var fullName = "";
+            userInformation.find({_id: currentUserId}).map(function(db) {
+                fullName = db.name;
+              })
+            return fullName;
+        } else {
+            return Session.get('realName');
+        }
     });
 
     getUsersRealName = function() {
