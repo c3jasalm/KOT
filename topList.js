@@ -38,7 +38,7 @@ if (Meteor.isClient) {
     var total = 0;
       
     HoursList.find({ghUserId: userName}).map(function(db) {
-      total += parseInt(db.stop - db.start);
+      total += parseInt(db.usedTime);
     })
        
     var totalMinutes = total / 1000 / 60;
