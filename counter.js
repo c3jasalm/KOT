@@ -85,8 +85,8 @@ if (Meteor.isClient) {
     		event.preventDefault();
 			counter: {    	
 				var state = Session.get('currentState');
-				var minValue = Session.get('usedMinutes');
-					if (minValue <= 15 && state == 'on') { //Alert about too short time
+				var minValue = Session.get('counterMinutes');
+					if (minValue < 15 && state == 'on') { //Alert about too short time
 						if(!confirm('Times shorter than 15 mins cannot be saved. Are you sure that you want stop clock?')) {
 							break counter;}
 					}
