@@ -80,40 +80,50 @@ if (Meteor.isClient) {
   	}
 });
 
-  Template.counter.events({
-    'click #startStop': function (event) {
-    	event.preventDefault();
-    	var state = Session.get('currentState');
-    	if (state === 'on') {
-    		stopp = new Date();
-    		startp = new Date(start.previousState);
-      usedTime = new Date(stopp.getTime() - start.previousState.getTime());
-      Session.set('stop', stopp);
-      Session.set('usedHours', usedTime.getUTCHours());
-      Session.set('usedMinutes', usedTime.getMinutes());
-      Session.set('usedSeconds', usedTime.getSeconds());    
-      // Call server to reset counter state
-      var currentUserId = Meteor.userId();
-      Meteor.call('clearCounterState', currentUserId);
-    	 Session.set('currentState', 'off'); 
-    	 Session.set('counterSave', true);
-    	 Session.set('startStopColor', 'btn btn-success');
-    	 Session.set('submitStatus', 'enabled');
-    	 Session.set('glyphicon', 'glyphicon glyphicon-play');
-    	} else {
-    		Session.set('usedHours', 0);
-		Session.set('usedMinutes', 0);
-		Session.set('usedSeconds', 0); // Will be removed later
-      	// Call method to set counter state
-      	var currentUserId = Meteor.userId();
-      	var counterStart = new Date();
-      	Meteor.call('setCounterState', currentUserId, counterStart);
-    		Session.set('currentState', 'on'); 
-    		Session.set('startStopColor', 'btn btn-danger');
-    		Session.set('submitStatus', 'disabled');
-    		Session.set('glyphicon', 'glyphicon glyphicon-stop');
-    		counterStarted = new Date();
-    	}
+	Template.counter.events({
+		'click #startStop': function (event) {
+    		event.preventDefault();
+			counter: {    	
+				var state = Session.get('currentState');
+				var minValue = Session.get('usedMinutes');
+					if (minValue <= 15 && state == 'on') { //Alert about too short time
+						if(!confirm('Times shorter than 15 mins cannot be saved. Are you sure that you want stop clock?')) {
+							break counter;}
+					}
+					if (state === 'on') {
+						stopp = new Date();
+						startp = new Date(start.previousState);
+						usedTime = new Date(stopp.getTime() - start.previousState.getTime());
+						Session.set('stop', stopp);
+						Session.set('usedHours', usedTime.getUTCHours());
+						Session.set('usedMinutes', usedTime.getMinutes());
+						Session.set('usedSeconds', usedTime.getSeconds());    
+						// Call server to reset counter state
+						var currentUserId = Meteor.userId();
+						Meteor.call('clearCounterState', currentUserId);
+						Session.set('currentState', 'off'); 
+						Session.set('counterSave', true);
+						Session.set('startStopColor', 'btn btn-success');
+						var minValue = Session.get('usedMinutes');
+						if (minValue >= 15) { //Times shorter than 15 mins cannot be saved
+							Session.set('submitStatus', 'enabled');
+						}
+						Session.set('glyphicon', 'glyphicon glyphicon-play');
+    					} else {
+							Session.set('usedHours', 0);
+							Session.set('usedMinutes', 0);
+							Session.set('usedSeconds', 0); // Will be removed later
+      					// Call method to set counter state
+							var currentUserId = Meteor.userId();
+							var counterStart = new Date();
+							Meteor.call('setCounterState', currentUserId, counterStart);
+							Session.set('currentState', 'on'); 
+							Session.set('startStopColor', 'btn btn-danger');
+							Session.set('submitStatus', 'disabled');
+							Session.set('glyphicon', 'glyphicon glyphicon-stop');
+							counterStarted = new Date();
+    						}
+    					}
     },
     'submit form': function (event) {
     	event.preventDefault();
