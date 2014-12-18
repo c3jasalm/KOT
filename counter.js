@@ -1,5 +1,6 @@
 // Storage for counter state
 CounterState = new Meteor.Collection('stateStore');
+
 if (Meteor.isClient) {
 	Session.setDefault('usedHours', 0);
 	Session.setDefault('usedMinutes', 0);
@@ -9,10 +10,14 @@ if (Meteor.isClient) {
 	Session.setDefault('submitStatus', 'disabled');
 	Session.set('glyphicon', 'glyphicon glyphicon-play');
 	
+	// If counter is on refresh used time once in every second	
 	Meteor.setInterval(function () {
-		Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
-		Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
-		Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
+		var state = Session.get('currentState');
+		if (state == 'on') {
+			Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
+			Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
+			Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
+		}
 	},1000);
  
   Template.counter.helpers({
