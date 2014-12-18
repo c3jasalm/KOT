@@ -131,10 +131,10 @@ if (Meteor.isClient) {
     	var usedTimeVar = stopp -startp;
     	var quarter = 1000 * 60 * 15; // 15 minutes
     	var usedMinutesVar = new Date(usedTimeVar).getMinutes();
-    	if (usedMinutesVar < 5
-    		|| usedMinutesVar > 15 && usedMinutesVar < 20
-    		|| usedMinutesVar > 30 && usedMinutesVar < 35
-    		|| usedMinutesVar > 45 && usedMinutesVar < 50) {
+    	if (usedMinutesVar <= 5
+    		|| usedMinutesVar >= 15 && usedMinutesVar <= 20
+    		|| usedMinutesVar >= 30 && usedMinutesVar <= 35
+    		|| usedMinutesVar >= 45 && usedMinutesVar <= 50) {
     		var roundedTime =  (Math.floor(usedTimeVar / quarter) * quarter);
     	} else {
     			var roundedTime =  (Math.ceil(usedTimeVar / quarter) * quarter);
