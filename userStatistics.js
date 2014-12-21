@@ -8,8 +8,19 @@ if (Meteor.isClient) {
             return getBarColor();
         }
   });
+  
+
 
   Template.userStatistics.events({
+    'focus #autocomplete': function(){
+        console.log("GOT FOCUS!");
+        $( "#autocomplete" ).autocomplete({
+            source: [ "KOT", "Nakkikone", "NoToDo" ]
+        });    
+    },
+    'blur #autocomplete': function(){
+        console.log("LOST FOCUS!"); 
+    },
   });
   
     percentageOfHours = function() {

@@ -1,7 +1,9 @@
 <template name="userStatistics">
     <p><b>User info</b></p>
     <p>Name: {{currentUserRealName}}</p>
-    <p>Team: </p>
+    <div>
+        Team: <input id="autocomplete" title="Type team name">
+    </div>
     <p>-----------------------</p>
     <p><b>User statistics</b></p>
     <p>{{totalHoursFloat}} hours out of 85 hours done</p>
