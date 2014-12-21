@@ -6,6 +6,10 @@
     <p><b>User statistics</b></p>
     <p>{{totalHoursFloat}} hours out of 85 hours done</p>
     <p>%: {{percentage}}</p>
-    <div id="progressbar"></div>
+    <div class="progress">
+      <div class="progress-bar {{color}}" role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}}%">
+        {{percentage}}%
+      </div>
+    </div>
     
 </template>		
