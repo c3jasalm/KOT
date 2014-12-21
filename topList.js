@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+    Session.setDefault('orderBy', 'hours');
 
     Template.topList.helpers({
         'topList': function () {
@@ -20,9 +21,47 @@ if (Meteor.isClient) {
             });
             console.log("Array: " + usersHours[0]["id"]);
             
-            var sorted = _.sortBy(usersHours, 'hours');
-            return sorted.reverse();
+            if (Session.get('orderBy') === "hours") {
+                var sorted = _.sortBy(usersHours, 'hours');
+                return sorted.reverse();
+            } else if (Session.get('orderBy') === "user") {
+                var sorted = _.sortBy(usersHours, 'realName');
+                return sorted;//.reverse();
+            } else if (Session.get('orderBy') === "team") {
+                var sorted = _.sortBy(usersHours, 'team');
+                return sorted;//.reverse();
+            }
+        },
+        'hoursStyle': function () {
+            if (Session.get('orderBy') === "hours") {
+                return "orderBy";
+            }
+        },
+        'teamStyle': function () {
+            if (Session.get('orderBy') === "team") {
+                return "orderBy";
+            }
+        },
+        'userStyle': function () {
+            if (Session.get('orderBy') === "user") {
+                return "orderBy";
+            }
         }
+            
+            
+    });
+  
+    Template.topList.events({
+        'click .user': function() {
+            Session.set('orderBy', 'user');
+        },
+        'click .team': function() {
+            Session.set('orderBy', 'team');
+        },
+        'click .hours': function() {
+            Session.set('orderBy', 'hours');
+        }
+    
     });
   
     listUniqueUsers = function() {
