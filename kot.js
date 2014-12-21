@@ -29,7 +29,8 @@ if (Meteor.isClient) {
                 console.log("ADD");
                 userInformation.insert({
                     _id: currentUserId,
-                    name: realName
+                    name: realName,
+                    team: ""
                 });
             }
         }    

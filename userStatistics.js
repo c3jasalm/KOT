@@ -6,6 +6,17 @@ if (Meteor.isClient) {
         },
         color: function () {
             return getBarColor();
+        },
+        currentTeam: function () {
+            var uid = Meteor.user().services.github.username;
+            console.log("Call current team " + uid);
+            var team;
+            userInformation.find({_id: uid}).map(function(db) {
+                console.log("Get team: " + String(db.team));
+                team = String(db.team);
+            }) 
+            console.log("Return team: " + team);
+            return team;
         }
   });
   
@@ -19,7 +30,12 @@ if (Meteor.isClient) {
         });    
     },
     'blur #autocomplete': function(){
-        console.log("LOST FOCUS!"); 
+        console.log("LOST FOCUS!");
+        var newTeam = autocomplete.value;
+        console.log("TEAM: " + newTeam);
+        var newInfo = {team: newTeam};
+        var currentUserId = Meteor.user().services.github.username;
+        userInformation.update( {_id: currentUserId}, { $set: newInfo });
     },
   });
   
@@ -29,6 +45,7 @@ if (Meteor.isClient) {
         var percentage = current / goal * 100;
         return Math.round(percentage);
     }  
+    
     getBarColor = function() {
         var percentage = percentageOfHours();
         if (percentage < 25) {
@@ -39,6 +56,7 @@ if (Meteor.isClient) {
             return "progress-bar-success";
         }
     }
+    
     Template.userStatistics.rendered = function() {
         $( "#progressbar" ).progressbar({
             value: percentageOfHours()
