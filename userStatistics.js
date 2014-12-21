@@ -25,8 +25,10 @@ if (Meteor.isClient) {
   Template.userStatistics.events({
     'focus #autocomplete': function(){
         console.log("GOT FOCUS!");
+        var teams = listUniqueTeams();
+        console.log("Unique teams: " + teams);
         $( "#autocomplete" ).autocomplete({
-            source: [ "KOT", "Nakkikone", "NoToDo" ]
+            source: teams
         });    
     },
     'blur #autocomplete': function(){

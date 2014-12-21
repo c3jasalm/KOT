@@ -9,12 +9,14 @@ if (Meteor.isClient) {
                 console.log("CountFor: " + user);
                 var userHours = countHoursForUser(user);
                 var realUserName;
+                var team;
                 
                 userInformation.find({_id: user}).map(function(db) {
                   realUserName = db.name;
+                  team = db.team;
                 })
                 
-                usersHours.push({id:user, hours:userHours, realName:realUserName});
+                usersHours.push({id:user, hours:userHours, realName:realUserName, team: team});
             });
             console.log("Array: " + usersHours[0]["id"]);
             
