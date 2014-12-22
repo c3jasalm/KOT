@@ -17,6 +17,13 @@ if (Meteor.isClient) {
 			Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
 			Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
 			Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
+			if (Session.get('counterSeconds') == 0 && Session.get('counterMinutes') == 0 && Session.get('counterHours') == 3) {
+				var beep = new Audio("beep.wav"); 
+				beep.play(); //Play beep if clock has been running 3 hours
+				setTimeout(function () {
+					alert('Just reminding that clock has been now on 3 hours');				
+				},1000);
+			}
 		}
 	},1000);
  
