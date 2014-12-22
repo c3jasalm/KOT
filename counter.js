@@ -36,6 +36,7 @@ if (Meteor.isClient) {
  			Session.set('startStopColor', 'btn btn-danger');
  			Session.set('glyphicon', 'glyphicon glyphicon-stop');
  			Session.set('submitStatus', 'disabled');
+ 			counterStarted = new Date(start.previousState);
  		} else {
  			Session.set('currentState', 'off');
  			Session.set('startStopColor', 'btn btn-success');
