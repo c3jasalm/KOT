@@ -53,3 +53,7 @@
 .orderBy {
  text-decoration: underline;
 }
+
+.orderByReverse {
+ text-decoration: overline;
+}

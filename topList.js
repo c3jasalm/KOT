@@ -1,13 +1,13 @@
 if (Meteor.isClient) {
-    Session.setDefault('orderBy', 'hours');
+    Session.setDefault('orderBy', 'hours'); //On what parameter order the list by, default is descending hours 
 
     Template.topList.helpers({
         'topList': function () {
             var usersHours = [];
             var uniqueUsers = listUniqueUsers();
             
+            //Generate row for each user
             uniqueUsers.forEach(function(user) {
-                console.log("CountFor: " + user);
                 var userHours = countHoursForUser(user);
                 var realUserName;
                 var team;
@@ -19,8 +19,8 @@ if (Meteor.isClient) {
                 
                 usersHours.push({id:user, hours:userHours, realName:realUserName, team: team});
             });
-            console.log("Array: " + usersHours[0]["id"]);
             
+            //Return ordered list based on ordering parameter
             if (Session.get('orderBy') === "hours") {
                 var sorted = _.sortBy(usersHours, 'hours');
                 return sorted.reverse();
@@ -30,40 +30,71 @@ if (Meteor.isClient) {
             } else if (Session.get('orderBy') === "team") {
                 var sorted = _.sortBy(usersHours, 'team');
                 return sorted;//.reverse();
+            } else if (Session.get('orderBy') === "hoursReverse") {
+                var sorted = _.sortBy(usersHours, 'hours');
+                return sorted;//.reverse();
+            } else if (Session.get('orderBy') === "userReverse") {
+                var sorted = _.sortBy(usersHours, 'realName');
+                return sorted.reverse();
+            } else if (Session.get('orderBy') === "teamReverse") {
+                var sorted = _.sortBy(usersHours, 'team');
+                return sorted.reverse();
             }
         },
+        //Label styles, set none, underline or overline whether item is used in ordering
         'hoursStyle': function () {
             if (Session.get('orderBy') === "hours") {
                 return "orderBy";
+            } else if (Session.get('orderBy') === "hoursReverse") {
+                return "orderByReverse";
             }
         },
         'teamStyle': function () {
             if (Session.get('orderBy') === "team") {
                 return "orderBy";
+            } else if (Session.get('orderBy') === "teamReverse") {
+                return "orderByReverse";
             }
         },
         'userStyle': function () {
             if (Session.get('orderBy') === "user") {
                 return "orderBy";
+            } else if (Session.get('orderBy') === "userReverse") {
+                return "orderByReverse";
             }
         }
             
             
     });
-  
+
+    //Clicking on labels causes list to be reordered
     Template.topList.events({
         'click .user': function() {
-            Session.set('orderBy', 'user');
+            if (Session.get('orderBy') === "user") {
+                Session.set('orderBy', 'userReverse');
+            } else {
+                Session.set('orderBy', 'user');
+            }
         },
         'click .team': function() {
-            Session.set('orderBy', 'team');
+            if (Session.get('orderBy') === "team") {
+                Session.set('orderBy', 'teamReverse');
+            } else {
+                Session.set('orderBy', 'team');
+            }
+                
         },
         'click .hours': function() {
-            Session.set('orderBy', 'hours');
+            if (Session.get('orderBy') === "hours") {
+                Session.set('orderBy', 'hoursReverse');
+            } else {
+                Session.set('orderBy', 'hours');
+            }
         }
     
     });
-  
+    
+    //Returns list of unique GH usernames from HoursList
     listUniqueUsers = function() {
         var users = [];
         HoursList.find().map(function(db) {
@@ -71,10 +102,10 @@ if (Meteor.isClient) {
                 users.push(String(db.ghUserId));
             }
         })
-        console.log(users.toString());
         return users;
     }
   
+    //Returns list of unique team names from userInformation
     listUniqueTeams = function() {
         var teams = [];
         userInformation.find().map(function(db) {
@@ -82,10 +113,10 @@ if (Meteor.isClient) {
                 teams.push(String(db.team));
             }
         })
-        console.log(teams.toString());
         return teams;
     }
      
+    //Count hours for specific user, takes GH username as parameter
     countHoursForUser = function(userName) {
         var total = 0;
           
