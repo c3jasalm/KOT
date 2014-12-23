@@ -94,7 +94,8 @@ if (Meteor.isClient) {
 			counter: {    	
 				var state = Session.get('currentState');
 				var minValue = Session.get('counterMinutes');
-					if (minValue < 15 && state == 'on') { //Alert about too short time
+				var hourValue = Session.get('counterHours');
+					if (minValue < 15 && hourValue < 1 && state == 'on') { //Alert about too short time
 						if(!confirm('Times shorter than 15 mins cannot be saved. Are you sure that you want stop clock?')) {
 							break counter;}
 					}
@@ -113,7 +114,8 @@ if (Meteor.isClient) {
 						Session.set('counterSave', true);
 						Session.set('startStopColor', 'btn btn-success');
 						var minValue = Session.get('usedMinutes');
-						if (minValue >= 15) { //Times shorter than 15 mins cannot be saved
+						var hourValue = Session.get('usedHours');
+						if (minValue >= 15 || hourValue >= 1) { //Times shorter than 15 mins cannot be saved
 							Session.set('submitStatus', 'enabled');
 						}
 						Session.set('glyphicon', 'glyphicon glyphicon-play');
