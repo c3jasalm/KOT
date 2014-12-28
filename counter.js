@@ -42,7 +42,13 @@ if (Meteor.isClient) {
  			Session.set('startStopColor', 'btn btn-success');
  			Session.set('glyphicon', 'glyphicon glyphicon-play');
  		}
-    	return moment(start.previousState).format('DD.MM.YYYY HH:mm');
+
+        try {
+            return moment(start.previousState).format('DD.MM.YYYY HH:mm');
+        }
+        catch(err) {
+            console.log("start.previousState not defined");
+        }
  	},
  	'timeStop': function () {
  		return Session.get('stop');
