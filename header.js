@@ -2,21 +2,21 @@
 if (Meteor.isClient) {
 
 	Template.header.helpers({
+        //Returns GitHub avatar
 		'avatarUser': function () {
             var pathVar = Meteor.user().services.github.username;
             return 'https://avatars.githubusercontent.com/' + pathVar + '?s=200';
 		},
+        //Returns GitHub username
 		'currentUserName': function () {
             return Meteor.user().services.github.username;
     	}
 	});
+    //Returns users real name, registered helper -> can be used from other template also
     Template.registerHelper("currentUserRealName",function(){
-        console.log("CURN: " + Session.get('realName'));
         if (typeof(Session.get('realName')) === 'undefined')
         {
-            console.log("Use DB");
             var currentUserId = Meteor.user().services.github.username;
-            console.log("CURN ID: " + currentUserId);
             var fullName = "";
             userInformation.find({_id: currentUserId}).map(function(db) {
                 fullName = db.name;
@@ -26,7 +26,8 @@ if (Meteor.isClient) {
             return Session.get('realName');
         }
     });
-
+    
+    //Returns users real name from GitHub
     getUsersRealName = function() {
         var pathVar = Meteor.user().services.github.username;
     	var apiPath = "https://api.github.com/users/" + pathVar;
@@ -37,6 +38,9 @@ if (Meteor.isClient) {
             Session.set('realName', fullName.name);
     	});
         */
+        //User name must be retrieved during login
+        //Use synchronous get for retrieving information from GitHub
+        //TODO: Minimize login delay by doing this on the server, or asynchronously
         $.ajax({
             async: false,
             type: 'GET',
