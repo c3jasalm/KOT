@@ -2,17 +2,17 @@ HoursList = new Mongo.Collection('hours');
 userInformation = new Mongo.Collection('userInfo');
 if (Meteor.isClient) {
     Meteor.startup(function(){
-        Hooks.init();
+        //Initialize Event Hooks
+        Hooks.init(); 
     });
     
-     Hooks.onLoggedIn = function () {
+    //User is logging in
+    Hooks.onLoggedIn = function () {
         if (Meteor.user()) {
-            console.log("SET USER INFO");
             var currentUserId = Meteor.user().services.github.username;
             //Check if user exists
             var current = userInformation.findOne({_id: currentUserId});
             var realName = getUsersRealName();
-            console.log("REAL: " + realName);
             
             //Alert if name is not set
             if (realName === "") {
@@ -22,11 +22,9 @@ if (Meteor.isClient) {
             
             //If user exists update, otherwise add
             if (current) {
-                console.log("UPDATE");
                 var newInfo = {name: realName};
                 userInformation.update( {_id: currentUserId}, { $set: newInfo });
             } else {
-                console.log("ADD");
                 userInformation.insert({
                     _id: currentUserId,
                     name: realName,
@@ -35,11 +33,6 @@ if (Meteor.isClient) {
             }
         }    
      }
-     
-    function precise_round(num, decimals) {
-        var t=Math.pow(10, decimals);   
-        return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
-    }
 }
 
 if (Meteor.isServer) {
