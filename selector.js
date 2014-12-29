@@ -4,6 +4,7 @@ if (Meteor.isClient) {
  	Template.selector.helpers({
 	});
 
+	// DateTimePicker for selecting task start date and time
 	Template.selector.rendered = function() {
     $('.datetimepicker').datetimepicker({maxDate: new Date(), minuteStepping:15, format: 'MM/DD/YYYY HH:mm', defaultDate: new Date()});
     };
@@ -13,8 +14,8 @@ if (Meteor.isClient) {
 	'submit form': function (event) {
     		event.preventDefault();
     		var currentUserId = Meteor.userId();
-    		var todayVar = Date.parse(event.target.dtPicker.value); //Get value from input. Will be replaced with datepicker
-    		var startVar = new Date(todayVar); // Will be replaced with datepicker
+    		var todayVar = Date.parse(event.target.dtPicker.value); //Get value from datepicker
+    		var startVar = new Date(todayVar); 
             
 		//Get minutes
 		var stopMinutes = event.target.timeSelector.value;
