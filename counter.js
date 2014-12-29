@@ -95,7 +95,7 @@ if (Meteor.isClient) {
 });
 
 	Template.counter.events({
-		// Starts clock if it is off, or stops clock is it is on.
+		// Starts clock if it is off, or stops clock if it is on.
 		'click #startStop': function (event) {
     		event.preventDefault();
 			counter: {    	
