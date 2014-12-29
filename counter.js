@@ -95,6 +95,7 @@ if (Meteor.isClient) {
 });
 
 	Template.counter.events({
+		// Starts clock if it is off, or stops clock is it is on.
 		'click #startStop': function (event) {
     		event.preventDefault();
 			counter: {    	
@@ -147,6 +148,7 @@ if (Meteor.isClient) {
     	var usedTimeVar = stopp -startp;
     	var quarter = 1000 * 60 * 15; // 15 minutes
     	var usedMinutesVar = new Date(usedTimeVar).getMinutes();
+    	// Rounds used time to nearest 15 minutes, max 5 mins down or 10 mins up.
     	if (usedMinutesVar <= 5
     		|| usedMinutesVar >= 15 && usedMinutesVar <= 20
     		|| usedMinutesVar >= 30 && usedMinutesVar <= 35
