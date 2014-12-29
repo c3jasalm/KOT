@@ -17,11 +17,13 @@ if (Meteor.isClient) {
   });
   
   Template.displayHours.events({
+  		//Delete entry if confirmed.
   		'click .delete': function () {
   			if(confirm('You are going to delete entry. Are you sure?')) {
     			HoursList.remove(this._id);
     		}
   		},
+  		//Show or hide delete buttons
   		'change #showDelete': function (event) {
   			Session.set("isChecked", event.target.checked);
  		}
