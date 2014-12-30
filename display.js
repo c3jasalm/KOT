@@ -8,6 +8,9 @@ if (Meteor.isClient) {
     'formatDate': function(date) {
   	return moment(date).format('DD.MM.');
   	},
+  	'formatStartTime': function(time) {
+  	return moment(time).format('HH:mm');
+  	},
   	'formatTime': function(time) {
   	return moment.utc(time).format('HH:mm');
   	},
