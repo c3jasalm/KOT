@@ -132,7 +132,8 @@ if (Meteor.isClient) {
     						// Check if there is overlapping with some previous entry
     						if (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: counterStarted}}, {stop: { $gt: counterStarted}}]})) {
 								// Display alert if there is overlaping and do not start clock
-								alert('Your new entry is overlaping with some other entry');
+								alert('Your new entry is overlapping with previous task: ' +
+								HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: counterStarted}}, {stop: { $gt: counterStarted}}]}).comment);
 								break counter;
 							} 
 							Session.set('usedHours', 0);
