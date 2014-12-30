@@ -127,6 +127,14 @@ if (Meteor.isClient) {
 						}
 						Session.set('glyphicon', 'glyphicon glyphicon-play');
     					} else {
+    						counterStarted = new Date();
+    						var currentUserId = Meteor.userId();
+    						// Check if there is overlapping with some previous entry
+    						if (HoursList.findOne({$and: [{userId: currentUserId}, {start: { $lte: counterStarted}}, {stop: { $gt: counterStarted}}]})) {
+								// Display alert if there is overlaping and do not start clock
+								alert('Your new entry is overlaping with some other entry');
+								break counter;
+							} 
 							Session.set('usedHours', 0);
 							Session.set('usedMinutes', 0);
 							Session.set('usedSeconds', 0); // Will be removed later
@@ -138,7 +146,6 @@ if (Meteor.isClient) {
 							Session.set('startStopColor', 'btn btn-danger');
 							Session.set('submitStatus', 'disabled');
 							Session.set('glyphicon', 'glyphicon glyphicon-stop');
-							counterStarted = new Date();
     						}
     					}
     },
