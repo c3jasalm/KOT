@@ -19,13 +19,13 @@ if (Meteor.isClient) {
 			Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
 			// After 6 hours stop clock and give alert
 			if (Session.get('counterHours') >= 6) {
-						stopp = new Date();
 						startp = new Date(start.previousState);
+						stopp = new Date(startp.getTime() + 1000 * 60 * 60 * 6);
 						usedTime = new Date(stopp.getTime() - start.previousState.getTime());
 						Session.set('stop', stopp);
-						Session.set('usedHours', usedTime.getUTCHours());
-						Session.set('usedMinutes', usedTime.getMinutes());
-						Session.set('usedSeconds', usedTime.getSeconds());    
+						Session.set('usedHours', 6);
+						Session.set('usedMinutes', 0);
+						Session.set('usedSeconds', 0);    
 						// Call server to reset counter state
 						var currentUserId = Meteor.userId();
 						Meteor.call('clearCounterState', currentUserId);
