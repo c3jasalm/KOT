@@ -17,12 +17,26 @@ if (Meteor.isClient) {
 			Session.set('counterSeconds', new Date(new Date - counterStarted).getSeconds());
 			Session.set('counterMinutes', new Date(new Date - counterStarted).getMinutes());
 			Session.set('counterHours', new Date(new Date - counterStarted).getUTCHours());
-			if (Session.get('counterSeconds') == 0 && Session.get('counterMinutes') == 0 && Session.get('counterHours') == 3) {
-				var beep = new Audio("beep.wav"); 
-				beep.play(); //Play beep if clock has been running 3 hours
-				setTimeout(function () {
-					alert('Just reminding that clock has been now on 3 hours');				
-				},1000);
+			// After 6 hours stop clock and give alert
+			if (Session.get('counterHours') >= 6) {
+						stopp = new Date();
+						startp = new Date(start.previousState);
+						usedTime = new Date(stopp.getTime() - start.previousState.getTime());
+						Session.set('stop', stopp);
+						Session.set('usedHours', usedTime.getUTCHours());
+						Session.set('usedMinutes', usedTime.getMinutes());
+						Session.set('usedSeconds', usedTime.getSeconds());    
+						// Call server to reset counter state
+						var currentUserId = Meteor.userId();
+						Meteor.call('clearCounterState', currentUserId);
+						Session.set('currentState', 'off'); 
+						Session.set('counterSave', true);
+						Session.set('startStopColor', 'btn btn-success');
+						var minValue = Session.get('usedMinutes');
+						var hourValue = Session.get('usedHours');
+						Session.set('submitStatus', 'enabled');
+						Session.set('glyphicon', 'glyphicon glyphicon-play');
+						alert('You have worked now 6 hours. Clock is stopped and you must rest. Save task!');
 			}
 		}
 	},1000);
