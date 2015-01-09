@@ -1,10 +1,11 @@
 
 if (Meteor.isClient) {
-Template.tabs.rendered = function() {
-    $(function() {
-        $( "#tabs" ).tabs();
-    });
-}
+    //Tabs widget
+    Template.tabs.rendered = function() {
+        $(function() {
+            $( "#tabs" ).tabs();
+        });
+    }
 }
 
 if (Meteor.isServer) {
