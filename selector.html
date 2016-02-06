@@ -6,13 +6,13 @@
 		<div class='col-md-3'>
 		<label>Task started</label>
  			<div class="input-group datetimepicker">
-    				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    				<span class="input-group-addon" id="dateTimeCalendar"><i class="glyphicon glyphicon-calendar"></i></span>
     				<input class="set-due-date form-control" type="text" name="dtPicker" readonly="readonly"/>
  			</div>
   		</div>
 		<div class='col-md-2'>
 			<label>Time used</label><br>
-      	<select class="form-control" name="timeSelector">
+      	<select class="form-control" name="timeSelector" id="setTime">
      		<option value=15>00:15</option>
   			<option value=30>00:30</option>
   			<option value=45>00:45</option>
@@ -29,11 +29,11 @@
 		</div>
 		<div class='col-md-5'>
 			<label>Task description</label>
-        <input class="form-control" type="text" name="comment" required/>
+        <input class="form-control" id="comment" type="text" name="comment" required/>
         </div>
         <div class='col-md-2'>
         <label>Save task</label><br>
-		<input type="submit" class="btn btn-primary" value="Submit">
+		<input type="submit" class="btn btn-primary" value="Submit" id="submitButton">
 		</div>
 		</div>
 		</div>
