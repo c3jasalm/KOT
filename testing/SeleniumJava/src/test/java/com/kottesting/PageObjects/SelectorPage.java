@@ -46,6 +46,7 @@ public class SelectorPage {
 
     public NavigationTabs tabs = new NavigationTabs();
     public TaskEntryList tasks = new TaskEntryList();
+    public UserInfo info = new UserInfo();
 
     public SelectorPage() throws Exception {
         this.selenium = DriverFactory.getDriver();
@@ -101,6 +102,7 @@ public class SelectorPage {
 
     public void submit() {
         submitButton.click();
+        commentField.clear();
     }
 
     private void clickTableItem(WebElement table, String targetString) {

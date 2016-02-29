@@ -69,7 +69,8 @@ public class TaskEntryList {
     public void deleteAllEntries() {
         enableDeletion();
         if(taskRows.size() > 0) {
-            for (int i = 0; i < taskRows.size(); i++) {
+            int rows = taskRows.size();
+            for (int i = 0; i < rows; i++) {
                 deleteTopEntry();
             }
         }

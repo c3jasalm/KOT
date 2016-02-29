@@ -42,6 +42,7 @@ public class HomePage {
 
     public NavigationTabs tabs = new NavigationTabs();
     public TaskEntryList tasks = new TaskEntryList();
+    public UserInfo info = new UserInfo();
 
     public HomePage() throws Exception {
         this.selenium = DriverFactory.getDriver();
@@ -92,7 +93,7 @@ public class HomePage {
 
         // Wait for login to complete
         try {
-            wait = new WebDriverWait(selenium, 10);
+            wait = new WebDriverWait(selenium, 30);
             wait.until(ExpectedConditions.visibilityOf(userInfo));
         } catch (org.openqa.selenium.TimeoutException e) {
             System.out.println("User info not found");
@@ -105,10 +106,6 @@ public class HomePage {
 
         //Log out
         logoutLink.click();
-    }
-
-    public boolean userInfoContains(String string) {
-        return userInfo.getText().contains(string);
     }
 
     public boolean canLogin() {
