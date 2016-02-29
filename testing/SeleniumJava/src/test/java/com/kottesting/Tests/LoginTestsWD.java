@@ -1,14 +1,13 @@
-package com.kottesting;
+package com.kottesting.Tests;
 
+import com.kottesting.DriverFactory;
+import com.kottesting.PageObjects.HomePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 public class LoginTestsWD extends DriverFactory {
-
+/*
     @BeforeTest
     private void beforeTest() throws Exception {
 
@@ -62,11 +61,5 @@ public class LoginTestsWD extends DriverFactory {
         Assert.assertTrue(hp.canLogin(), "FUN_003: Login succeeded with incorrect credentials");
 
     }
-
-    @AfterTest
-    private void testCleanUp() throws Exception {
-        getDriver().quit();
-    }
-
-
+    */
 }

@@ -1,53 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="37179" started-at="2016-02-27T15:01:15Z" finished-at="2016-02-27T15:01:52Z">
+  <suite name="Surefire suite" duration-ms="9619" started-at="2016-02-29T09:36:09Z" finished-at="2016-02-29T09:36:19Z">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="37179" started-at="2016-02-27T15:01:15Z" finished-at="2016-02-27T15:01:52Z">
-      <class name="com.kottesting.LoginTestsWD">
-        <test-method status="PASS" signature="instantiateDriverObject()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="instantiateDriverObject" is-config="true" duration-ms="7" started-at="2016-02-27T17:01:15Z" finished-at="2016-02-27T17:01:15Z">
+    <test name="Surefire test" duration-ms="9619" started-at="2016-02-29T09:36:09Z" finished-at="2016-02-29T09:36:19Z">
+      <class name="com.kottesting.Tests.SelectorTestsWD">
+        <test-method status="PASS" signature="SEL_001_BasicTaskEntry()[pri:0, instance:com.kottesting.Tests.SelectorTestsWD@3cda1055]" name="SEL_001_BasicTaskEntry" duration-ms="9614" started-at="2016-02-29T11:36:09Z" finished-at="2016-02-29T11:36:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SEL_001_BasicTaskEntry -->
+      </class> <!-- com.kottesting.Tests.SelectorTestsWD -->
+      <class name="com.kottesting.Tests.LoginTestsWD">
+        <test-method status="PASS" signature="instantiateDriverObject()[pri:0, instance:com.kottesting.Tests.LoginTestsWD@668bc3d5]" name="instantiateDriverObject" is-config="true" duration-ms="6" started-at="2016-02-29T11:36:09Z" finished-at="2016-02-29T11:36:09Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- instantiateDriverObject -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="beforeTest" is-config="true" duration-ms="1" started-at="2016-02-27T17:01:15Z" finished-at="2016-02-27T17:01:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="FUN_001_LoginWithCorrectCredentials()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="FUN_001_LoginWithCorrectCredentials" duration-ms="9759" started-at="2016-02-27T17:01:15Z" finished-at="2016-02-27T17:01:25Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- FUN_001_LoginWithCorrectCredentials -->
-        <test-method status="PASS" signature="clearCookies()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="clearCookies" is-config="true" duration-ms="357" started-at="2016-02-27T17:01:25Z" finished-at="2016-02-27T17:01:25Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- clearCookies -->
-        <test-method status="PASS" signature="FUN_002_Logout()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="FUN_002_Logout" duration-ms="8226" started-at="2016-02-27T17:01:25Z" finished-at="2016-02-27T17:01:33Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- FUN_002_Logout -->
-        <test-method status="PASS" signature="clearCookies()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="clearCookies" is-config="true" duration-ms="280" started-at="2016-02-27T17:01:33Z" finished-at="2016-02-27T17:01:34Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- clearCookies -->
-        <test-method status="PASS" signature="FUN_003_LoginWithIncorrectPassword()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="FUN_003_LoginWithIncorrectPassword" duration-ms="16302" started-at="2016-02-27T17:01:34Z" finished-at="2016-02-27T17:01:50Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- FUN_003_LoginWithIncorrectPassword -->
-        <test-method status="PASS" signature="clearCookies()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="clearCookies" is-config="true" duration-ms="293" started-at="2016-02-27T17:01:50Z" finished-at="2016-02-27T17:01:50Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- clearCookies -->
-        <test-method status="PASS" signature="testCleanUp()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="testCleanUp" is-config="true" duration-ms="1953" started-at="2016-02-27T17:01:50Z" finished-at="2016-02-27T17:01:52Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCleanUp -->
-        <test-method status="PASS" signature="closeDriverObjects()[pri:0, instance:com.kottesting.LoginTestsWD@6b2fad11]" name="closeDriverObjects" is-config="true" duration-ms="0" started-at="2016-02-27T17:01:52Z" finished-at="2016-02-27T17:01:52Z">
+        <test-method status="PASS" signature="closeDriverObjects()[pri:0, instance:com.kottesting.Tests.LoginTestsWD@668bc3d5]" name="closeDriverObjects" is-config="true" duration-ms="344" started-at="2016-02-29T11:36:19Z" finished-at="2016-02-29T11:36:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeDriverObjects -->
-      </class> <!-- com.kottesting.LoginTestsWD -->
+      </class> <!-- com.kottesting.Tests.LoginTestsWD -->
     </test> <!-- Surefire test -->
   </suite> <!-- Surefire suite -->
 </testng-results>

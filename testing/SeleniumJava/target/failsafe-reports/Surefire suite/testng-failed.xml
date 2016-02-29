@@ -3,7 +3,8 @@
 <suite thread-count="1" verbose="0" name="Failed suite [Surefire suite]" parallel="methods">
   <test name="Surefire test">
     <classes>
-      <class name="com.kottesting.LoginTestsWD"/>
+      <class name="com.kottesting.Tests.LoginTestsWD"/>
+      <class name="com.kottesting.Tests.SelectorTestsWD"/>
     </classes>
   </test> <!-- Surefire test -->
 </suite> <!-- Failed suite [Surefire suite] -->

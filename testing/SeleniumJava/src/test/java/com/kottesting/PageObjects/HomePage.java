@@ -1,7 +1,7 @@
 /**
  * Created by jasal on 10.2.2016.
  */
-package com.kottesting;
+package com.kottesting.PageObjects;
 
 import com.kottesting.DriverFactory;
 import org.openqa.selenium.By;
@@ -49,7 +49,6 @@ public class HomePage {
 
     // Navigate to root address
     public void goTo() {
-        //selenium.get("http://192.168.0.10:3000/");
         //selenium.get("http://cottest.meteor.com");
         selenium.get("http://localhost:3000");
     }

@@ -2,8 +2,9 @@
  * Created by jasal on 10.2.2016.
  */
 
-package com.kottesting;
+package com.kottesting.PageObjects;
 
+import com.kottesting.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

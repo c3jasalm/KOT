@@ -36,7 +36,7 @@ public class DriverFactory {
     @AfterMethod
     public static void clearCookies() throws Exception {
         //getDriver().manage().deleteAllCookies();
-        closeDriverObjects();
+        driverThread.get().quitDriver();
     }
 
     @AfterSuite
