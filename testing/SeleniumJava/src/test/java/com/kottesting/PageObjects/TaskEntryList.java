@@ -50,8 +50,10 @@ public class TaskEntryList {
 
     public void deleteTopEntry() {
         enableDeletion();
-        taskRows.get(0).findElement(By.name("deleteButton")).click();
-        selenium.switchTo().alert().accept();
+        if(taskRows.size() > 0) {
+            taskRows.get(0).findElement(By.name("deleteButton")).click();
+            selenium.switchTo().alert().accept();
+        }
     }
 
     private void enableDeletion() {
@@ -62,5 +64,14 @@ public class TaskEntryList {
 
     public int getListSize() {
         return taskRows.size();
+    }
+
+    public void deleteAllEntries() {
+        enableDeletion();
+        if(taskRows.size() > 0) {
+            for (int i = 0; i < taskRows.size(); i++) {
+                deleteTopEntry();
+            }
+        }
     }
 }
