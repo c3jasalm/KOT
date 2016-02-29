@@ -17,26 +17,30 @@
 			<div class='col-xs-3'><label>Task</label></div>
 		</div>
 		<ul class="list-unstyled">	
-		{{#each previousHours}}
-		<div class="row">
+		
+    <div id="taskList">
+    {{#each previousHours}}
+		  <div class="row" name="taskRow">
   			<li>
   			<div class='col-xs-1'>
   			{{#if isChecked}}
-  				<button class="delete btn btn-danger btn-xs">x</button>
+  				<button class="delete btn btn-danger btn-xs" name="deleteButton">x</button>
   			{{/if}}
   			</div>
-  				<div class='col-xs-2'>{{formatDate start}}</div> 
-  				<div class='col-xs-2'>{{formatStartTime start}}</div> 
-  				<div class='col-xs-2'>{{formatTime usedTime}}</div> 
+  				<div class='col-xs-2' name="date">{{formatDate start}}</div> 
+  				<div class='col-xs-2' name="time">{{formatStartTime start}}</div> 
+  				<div class='col-xs-2' name="duration">{{formatTime usedTime}}</div> 
   				{{#if inputType}}
-  					<div class='col-xs-1'><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
+  					<div class='col-xs-1'><span class="glyphicon glyphicon-calendar" aria-hidden="true" name="mode"></span></div>
   					{{else}}
-  						<div class='col-xs-1'><span class="glyphicon glyphicon-time" aria-hidden="true"></span></div>
+  						<div class='col-xs-1'><span class="glyphicon glyphicon-time" aria-hidden="true" name="mode"></span></div>
   				{{/if}}
-  				<div class='col-xs-3'>{{comment}}</div>
+  				<div class='col-xs-3' name="comment">{{comment}}</div>
   			</li>
   			</div>
-		{{/each}}
+        {{/each}}
+      </div>
+		
 		
 		</ul>
 	{{/if}}
