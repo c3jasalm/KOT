@@ -1,6 +1,7 @@
 package com.kottesting.PageObjects;
 
 import com.kottesting.DriverFactory;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,9 @@ public class TaskEntryList {
 
     @FindBy(name = "taskRow")
     List<WebElement> taskRows;
+
+    @FindBy(id = "showDelete")
+    private WebElement showDelete;
 
     public TaskEntryList() throws Exception {
         this.selenium = DriverFactory.getDriver();
@@ -42,5 +46,21 @@ public class TaskEntryList {
         }
 
         return entry;
+    }
+
+    public void deleteTopEntry() {
+        enableDeletion();
+        taskRows.get(0).findElement(By.name("deleteButton")).click();
+        selenium.switchTo().alert().accept();
+    }
+
+    private void enableDeletion() {
+        if(!showDelete.isSelected()) {
+            showDelete.click();
+        }
+    }
+
+    public int getListSize() {
+        return taskRows.size();
     }
 }

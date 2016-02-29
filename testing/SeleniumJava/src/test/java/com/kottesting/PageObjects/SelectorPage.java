@@ -29,9 +29,6 @@ public class SelectorPage {
     @FindBy(id = "submitButton")
     private WebElement submitButton;
 
-    @FindBy(id = "showDelete")
-    private WebElement showDelete;
-
     @FindBy(xpath = "/html/body/div[4]/ul/li[1]/div/div[1]/table/tbody")
     private WebElement dateSelectTable;
 
@@ -48,6 +45,7 @@ public class SelectorPage {
     private WebElement yearSelectTable;
 
     public NavigationTabs tabs = new NavigationTabs();
+    public TaskEntryList tasks = new TaskEntryList();
 
     public SelectorPage() throws Exception {
         this.selenium = DriverFactory.getDriver();

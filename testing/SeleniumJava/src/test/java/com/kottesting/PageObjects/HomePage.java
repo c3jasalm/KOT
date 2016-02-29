@@ -41,6 +41,7 @@ public class HomePage {
     private WebElement userInfo;
 
     public NavigationTabs tabs = new NavigationTabs();
+    public TaskEntryList tasks = new TaskEntryList();
 
     public HomePage() throws Exception {
         this.selenium = DriverFactory.getDriver();
