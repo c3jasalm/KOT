@@ -6,6 +6,7 @@ package com.kottesting.Tests;
 
 import com.kottesting.DriverFactory;
 import com.kottesting.PageObjects.*;
+import com.kottesting.util.Util;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +16,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class SelectorTestsWD extends DriverFactory {
@@ -55,15 +58,16 @@ public class SelectorTestsWD extends DriverFactory {
 
         hp.tabs.goToTab(NavigationTabs.Tab.SELECTOR);
 
+        // Enter task
         sp.setDate(year, month, date);
         sp.selectDuration(duration);
         sp.setDescription(description);
         sp.submit();
 
-        // Round time to nearest 15 minutes
+        // Round current time to nearest 15 minutes
+        Util util = new Util();
         DateTime dt = new DateTime();
-        int mod = dt.getMinuteOfHour() % 15;
-        dt = dt.plusMinutes(mod < 8 ? -mod : (15-mod));
+        dt = util.roundToNearestQuarter(dt);
 
         TaskEntry entry = sp.tasks.getTopEntry();
 
@@ -83,16 +87,18 @@ public class SelectorTestsWD extends DriverFactory {
     @Test
     private void SEL_002_EnteringMultipleTask() throws Exception{
         System.out.println("SEL_002");
-        String month = "Jan";
-        String[] dates = { "10", "12", "20" };
-        String year = "2015";
-        String[] durations = { "01:30", "02:30", "00:15" };
-        String[] comments = { "SEL_002 Task1", "SEL_002 Task2", "SEL_002 Task3" };
+
+        // Create list of tasks
+        List<TaskEntry> tasks = new ArrayList<TaskEntry>();
+        tasks.add(new TaskEntry("10-01-15", "01:30", "SEL_002 Task1"));
+        tasks.add(new TaskEntry("12-01-15", "02:30", "SEL_002 Task2"));
+        tasks.add(new TaskEntry("20-01-15", "00:15", "SEL_002 Task3"));
+
+        // Calculate expected total hours
         int totalHours = 0;
         int totalMinutes = 0;
-
-        for(String duration : durations) {
-            String[] parts = duration.split(":");
+        for(TaskEntry task : tasks) {
+            String[] parts = task.duration.split(":");
             totalHours += Integer.parseInt(parts[0]);
             totalMinutes += Integer.parseInt(parts[1]);
         }
@@ -109,14 +115,16 @@ public class SelectorTestsWD extends DriverFactory {
 
         hp.tabs.goToTab(NavigationTabs.Tab.SELECTOR);
 
-        for(int i = 0; i < dates.length; i++) {
-            sp.setDate(year, month, dates[i]);
-            sp.selectDuration(durations[i]);
-            sp.setDescription(comments[i]);
+        // Submit tasks
+        for(TaskEntry task : tasks) {
+            System.out.println(task.year + " " + task.month + " " + task.date);
+            sp.setDate(task.year, task.month, task.date);
+            sp.selectDuration(task.duration);
+            sp.setDescription(task.comment);
             sp.submit();
         }
 
-        Assert.assertEquals(sp.tasks.getListSize(), dates.length, "SEL_002: Incorrect number of tasks");
+        Assert.assertEquals(sp.tasks.getListSize(), tasks.size(), "SEL_002: Incorrect number of tasks");
         Assert.assertEquals(sp.info.getTotalTime(), String.format("%02d", totalHours) + ":" +
                 String.format("%02d", totalMinutes), "SEL_002: Incorrect total time");
 
@@ -124,7 +132,29 @@ public class SelectorTestsWD extends DriverFactory {
 
         Assert.assertEquals(sp.tasks.getListSize(), 0, "SEL_002: Tasks not deleted");
 
+        Assert.assertEquals(sp.info.getTotalTime(), "00:00", "SEL_002: Total hours is incorrect");
+
     }
+
+    @Test
+    private void SEL_003_DescriptionIsMandatory() throws Exception {
+        System.out.println("SEL_003");
+
+        String duration = "01:00";
+
+        HomePage hp = new HomePage();
+        SelectorPage sp = new SelectorPage();
+
+        hp.goTo();
+        hp.loginWithCorrectCredentials();
+
+        sp.selectDuration(duration);
+        sp.submit();
+
+        Assert.assertEquals(sp.tasks.getListSize(), 0, "SEL_003: Task List not empty");
+        Assert.assertEquals(sp.info.getTotalTime(), "00:00", "SEL_003: Total hours is incorrect");
+    }
+
 
     @AfterTest
     private void cleanUp() throws Exception {

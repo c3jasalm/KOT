@@ -32,18 +32,19 @@ public class TaskEntryList {
 
         WebElement taskRow = taskRows.get(0);
 
-        TaskEntry entry = new TaskEntry();
-
-        entry.date = taskRow.findElement(By.name("date")).getText();
-        entry.time = taskRow.findElement(By.name("time")).getText();
-        entry.duration = taskRow.findElement(By.name("duration")).getText();
-        entry.comment = taskRow.findElement(By.name("comment")).getText();
+        String date = taskRow.findElement(By.name("date")).getText();
+        String time = taskRow.findElement(By.name("time")).getText();
+        String duration = taskRow.findElement(By.name("duration")).getText();
+        String comment = taskRow.findElement(By.name("comment")).getText();
+        String mode = "";
 
         if(taskRow.findElement(By.name("mode")).getAttribute("class").contains("glyphicon-calendar")) {
-            entry.mode = "basic";
+            mode = "basic";
         } else {
-            entry.mode = "counter";
+            mode = "counter";
         }
+
+        TaskEntry entry = new TaskEntry(date, time, duration, mode, comment);
 
         return entry;
     }
