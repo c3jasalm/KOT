@@ -5,13 +5,17 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
+import org.openqa.selenium.Proxy;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static com.kottesting.config.DriverType.FIREFOX;
 import static com.kottesting.config.DriverType.valueOf;
+
+import static com.kottesting.config.DriverType.FIREFOX;
+import static com.kottesting.config.DriverType.valueOf;
+import static org.openqa.selenium.Proxy.ProxyType.MANUAL;
 
 public class WebDriverThread {
 
@@ -23,13 +27,17 @@ public class WebDriverThread {
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");
     private final boolean useRemoteWebDriver = Boolean.getBoolean("remoteDriver");
+    private final boolean proxyEnabled = Boolean.getBoolean("proxyEnabled");
+    private final String proxyHostname = System.getProperty("proxyHost");
+    private final Integer proxyPort = Integer.getInteger("proxyPort");
+    private final String proxyDetails = String.format("%s:%d", proxyHostname, proxyPort);
 
     public WebDriver getDriver() throws Exception {
 
         if(webdriver == null) {
             getNewDriver();
         }
-        else if (webdriver != null && webdriver.toString().contains("null")) {
+        else if (webdriver.toString().contains("null")) {
             getNewDriver();
         }
 
@@ -37,8 +45,15 @@ public class WebDriverThread {
     }
 
     public void getNewDriver() throws Exception{
+        Proxy proxy = null;
+        if (proxyEnabled) {
+            proxy = new Proxy();
+            proxy.setProxyType(MANUAL);
+            proxy.setHttpProxy(proxyDetails);
+            proxy.setSslProxy(proxyDetails);
+        }
         selectedDriverType = determineEffectiveDriverType();
-        DesiredCapabilities desiredCapabilities = selectedDriverType.getDesiredCapabilities();
+        DesiredCapabilities desiredCapabilities = selectedDriverType.getDesiredCapabilities(proxy);
         instantiateWebDriver(desiredCapabilities);
     }
 

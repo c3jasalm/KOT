@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class SelectorTestsWD extends DriverFactory {
-
+/*
     @BeforeClass
     private void initialClean() throws Exception {
         HomePage hp = new HomePage();
@@ -168,5 +168,5 @@ public class SelectorTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
-
+*/
 }

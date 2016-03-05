@@ -1,5 +1,6 @@
 package com.kottesting.config;
 
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,12 +16,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.openqa.selenium.remote.CapabilityType.PROXY;
+
 public enum DriverType implements DriverSetup {
 
     FIREFOX {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            return capabilities;
+            return addProxySettings(capabilities, proxySettings);
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
@@ -28,13 +31,13 @@ public enum DriverType implements DriverSetup {
         }
     },
     CHROME {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
             capabilities.setCapability("chrome.switches", Arrays.asList("--no-default-browser-check"));
             HashMap<String, String> chromePreferences = new HashMap<String, String>();
             chromePreferences.put("profile.password_manager_enabled", "false");
             capabilities.setCapability("chrome.prefs", chromePreferences);
-            return capabilities;
+            return addProxySettings(capabilities, proxySettings);
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
@@ -42,12 +45,12 @@ public enum DriverType implements DriverSetup {
         }
     },
     IE {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
             capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
             capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, true);
             capabilities.setCapability("requireWindowFocus", true);
-            return capabilities;
+            return addProxySettings(capabilities, proxySettings);
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
@@ -55,10 +58,10 @@ public enum DriverType implements DriverSetup {
         }
     },
     SAFARI {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.safari();
             capabilities.setCapability("safari.cleanSession", true);
-            return capabilities;
+            return addProxySettings(capabilities, proxySettings);
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
@@ -66,9 +69,9 @@ public enum DriverType implements DriverSetup {
         }
     },
     OPERA {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.operaBlink();
-            return capabilities;
+            return addProxySettings(capabilities, proxySettings);
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
@@ -76,13 +79,13 @@ public enum DriverType implements DriverSetup {
         }
     },
     PHANTOMJS {
-        public DesiredCapabilities getDesiredCapabilities() {
+        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
             DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
             final List<String> cliArguments = new ArrayList<String>();
             cliArguments.add("--web-security=false");
             cliArguments.add("--ssl-protocol=any");
             cliArguments.add("--ignore-ssl-errors=true");
-            capabilities.setCapability("phantomjs.cli.args", cliArguments);
+            capabilities.setCapability("phantomjs.cli.args", applyPhantomJSProxySettings(cliArguments, proxySettings));
             capabilities.setCapability("takesScreenshot", true);
 
             return capabilities;
@@ -92,4 +95,22 @@ public enum DriverType implements DriverSetup {
             return new PhantomJSDriver(capabilities);
         }
     };
+
+    protected DesiredCapabilities addProxySettings(DesiredCapabilities capabilities, Proxy proxySettings) {
+        if (null != proxySettings) {
+            capabilities.setCapability(PROXY, proxySettings);
+        }
+
+        return capabilities;
+    }
+
+    protected List<String> applyPhantomJSProxySettings(List<String> cliArguments, Proxy proxySettings) {
+        if (null == proxySettings) {
+            cliArguments.add("--proxy-type=none");
+        } else {
+            cliArguments.add("--proxy-type=http");
+            cliArguments.add("--proxy=" + proxySettings.getHttpProxy());
+        }
+        return cliArguments;
+    }
 }
