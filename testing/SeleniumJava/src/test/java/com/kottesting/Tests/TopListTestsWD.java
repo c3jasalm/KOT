@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by jasal on 7.3.2016.
  */
-public class UserInfoTestsWD extends DriverFactory {
+public class TopListTestsWD extends DriverFactory {
 
     @BeforeClass
     private void initialClean() throws Exception {
@@ -31,39 +31,33 @@ public class UserInfoTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
-/*
-    @Test
-    private void USR_001_UserStatistics() throws Exception {
-        System.out.println("USR_001");
 
-        // Create list of tasks
-        List<TaskEntry> tasks = new ArrayList<TaskEntry>();
-        tasks.add(new TaskEntry("10-01-15", "03:00", "USR_001 Task1"));
-        tasks.add(new TaskEntry("12-01-15", "03:00", "USR_001 Task2"));
-        tasks.add(new TaskEntry("20-01-15", "03:00", "USR_001 Task3"));
-        tasks.add(new TaskEntry("22-01-15", "03:00", "USR_001 Task4"));
-        tasks.add(new TaskEntry("24-01-15", "03:00", "USR_001 Task5"));
-        tasks.add(new TaskEntry("25-01-15", "03:00", "USR_001 Task6"));
+    @Test
+    private void TOP_001_TopListShowsUserNameAndTeam() throws Exception{
+        String team = "AAA";
+        String username = System.getenv("KOT_VALID_USERNAME");
 
         HomePage hp = new HomePage();
-        SelectorPage sp = new SelectorPage();
+        TopListPage tp = new TopListPage();
         UserStatisticsPage up = new UserStatisticsPage();
+        SelectorPage sp = new SelectorPage();
 
         hp.goTo();
         hp.loginWithCorrectCredentials();
 
         hp.tabs.goToTab(NavigationTabs.Tab.SELECTOR);
-
-        sp.submitTasks(tasks);
+        sp.setDescription("TOP_001");
+        sp.submit();
 
         hp.tabs.goToTab(NavigationTabs.Tab.STATISTICS);
+        up.setTeamName(team);
 
-        Assert.assertEquals(up.getTotalHours(), 18, "USR_001: Incorrect total hours");
-        Assert.assertEquals(up.getPercentage(), 21, "USR_001: Incorrect percentage");
-        Assert.assertEquals(up.getProgressBarPercentage(), 21, "USR_001: Incorrect progressbar percentage");
+        hp.tabs.goToTab(NavigationTabs.Tab.TOPLIST);
 
+        Assert.assertTrue(tp.getUserName().contains(username), "TOP_001: Wrong or missing username");
+        Assert.assertTrue(tp.getTeamName().equals(team), "TOP_001: Wrong or missing team name");
     }
-*/
+
     @AfterTest
     private void cleanUp() throws Exception {
         HomePage hp = new HomePage();

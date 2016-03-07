@@ -21,6 +21,9 @@ public class UserStatisticsPage {
     @FindBy(className = "progress-bar")
     WebElement progressBar;
 
+    @FindBy(id = "autocomplete")
+    WebElement teamName;
+
     public NavigationTabs tabs = new NavigationTabs();
     public TaskEntryList tasks = new TaskEntryList();
     public UserInfo info = new UserInfo();
@@ -42,5 +45,10 @@ public class UserStatisticsPage {
 
     public int getProgressBarPercentage() {
         return Integer.parseInt(progressBar.getAttribute("aria-valuenow"));
+    }
+
+    public void setTeamName(String name) {
+        teamName.clear();
+        teamName.sendKeys(name);
     }
 }
