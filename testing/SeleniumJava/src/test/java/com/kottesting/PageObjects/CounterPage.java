@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 /**
  * Created by jasal on 1.3.2016.
  */
@@ -40,14 +42,32 @@ public class CounterPage {
         startStopButton.click();
     }
 
-    public void recordTaskForDuration(int hours, int minutes) {
+    public void recordTaskForDuration(int hours, int minutes, String comment) {
         startStopCounter();
 
         waitUntil(hours, minutes);
 
+        System.out.println("START COUNTER");
         startStopCounter();
+        System.out.println("COUNTER STARTED");
 
-        selenium.switchTo().alert().accept();
+        if(hours == 0 && minutes < 15) {
+            selenium.switchTo().alert().accept();
+        }
+
+        System.out.println("INSERT COMMENT");
+        WebDriverWait wait = new WebDriverWait(selenium, 5, 500);
+        wait.until(ExpectedConditions.visibilityOf(commentField));
+        commentField.sendKeys(comment);
+        System.out.println("COMMENT INSERTED");
+
+        if(submitEnabled()) {
+            submitButton.click();
+        }
+
+        System.out.println("CLEAR FIELD");
+        commentField.clear();
+        System.out.println("FIELD CLEARED");
     }
 
     public void waitUntil(int hours, int minutes) {

@@ -115,14 +115,7 @@ public class SelectorTestsWD extends DriverFactory {
 
         hp.tabs.goToTab(NavigationTabs.Tab.SELECTOR);
 
-        // Submit tasks
-        for(TaskEntry task : tasks) {
-            System.out.println(task.year + " " + task.month + " " + task.date);
-            sp.setDate(task.year, task.month, task.date);
-            sp.selectDuration(task.duration);
-            sp.setDescription(task.comment);
-            sp.submit();
-        }
+        sp.submitTasks(tasks);
 
         Assert.assertEquals(sp.tasks.getListSize(), tasks.size(), "SEL_002: Incorrect number of tasks");
         Assert.assertEquals(sp.info.getTotalTime(), String.format("%02d", totalHours) + ":" +

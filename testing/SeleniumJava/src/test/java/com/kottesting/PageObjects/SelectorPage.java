@@ -105,6 +105,15 @@ public class SelectorPage {
         commentField.clear();
     }
 
+    public void submitTasks(List<TaskEntry> list) throws Exception {
+        for(TaskEntry task : list) {
+            setDate(task.year, task.month, task.date);
+            selectDuration(task.duration);
+            setDescription(task.comment);
+            submit();
+        }
+    }
+
     private void clickTableItem(WebElement table, String targetString) {
         // Scan table and click on a item
         List<WebElement> allRows = table.findElements(By.tagName("tr"));
