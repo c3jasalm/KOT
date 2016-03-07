@@ -6,11 +6,11 @@
     </div>
     <ul class="list-unstyled">
     {{#each topList}}
-   		<div class="row">
+   		<div class="row" name="topListRow">
   			<li>
-  				<div class='col-xs-5'>{{realName}} ({{id}})</div> 
-  				<div class='col-xs-5'>{{team}}</div> 
-                <div class='col-xs-1'>{{hours}}</div>
+  				<div class='col-xs-5' name="name">{{realName}} ({{id}})</div> 
+  				<div class='col-xs-5' name="team">{{team}}</div> 
+                <div class='col-xs-1' name="hours">{{hours}}</div>
   			</li>
 		</div>
     {{/each}}
