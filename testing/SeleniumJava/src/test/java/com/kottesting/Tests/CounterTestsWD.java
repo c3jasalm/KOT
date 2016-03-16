@@ -32,44 +32,44 @@ public class CounterTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
-    /*
-        @Test
-        private void CNT_001_TooShortDuration() throws Exception{
-            System.out.println("CNT_001");
 
-            HomePage hp = new HomePage();
-            CounterPage cp = new CounterPage();
+    @Test
+    private void CNT_001_TooShortDuration() throws Exception{
+        System.out.println("CNT_001");
 
-            hp.goTo();
-            hp.loginWithCorrectCredentials();
-            hp.tabs.goToTab(NavigationTabs.Tab.COUNTER);
+        HomePage hp = new HomePage();
+        CounterPage cp = new CounterPage();
 
-            cp.recordTaskForDuration(0, 2, "");
+        hp.goTo();
+        hp.loginWithCorrectCredentials();
+        hp.tabs.goToTab(NavigationTabs.Tab.COUNTER);
 
-            Assert.assertFalse(cp.submitEnabled(), "CNT_001: Submit is enabled");
-        }
+        cp.recordTaskForDuration(0, 2, "");
 
-        @Test
-        private void CNT_002_TooShortDurationContinue() throws Exception {
-            System.out.println("CNT_002");
+        Assert.assertFalse(cp.submitEnabled(), "CNT_001: Submit is enabled");
+    }
 
-            HomePage hp = new HomePage();
-            CounterPage cp = new CounterPage();
+    @Test
+    private void CNT_002_TooShortDurationContinue() throws Exception {
+        System.out.println("CNT_002");
 
-            hp.goTo();
-            hp.loginWithCorrectCredentials();
-            hp.tabs.goToTab(NavigationTabs.Tab.COUNTER);
+        HomePage hp = new HomePage();
+        CounterPage cp = new CounterPage();
 
-            cp.startStopCounter();
-            cp.waitUntil(0, 1);
-            cp.startStopCounter();
-            getDriver().switchTo().alert().dismiss();
-            cp.waitUntil(0, 2);
-            cp.startStopCounter();
-            getDriver().switchTo().alert().accept();
+        hp.goTo();
+        hp.loginWithCorrectCredentials();
+        hp.tabs.goToTab(NavigationTabs.Tab.COUNTER);
 
-            Assert.assertFalse(cp.submitEnabled(), "CNT_001: Submit is enabled");
-        }
+        cp.startStopCounter();
+        cp.waitUntil(0, 1);
+        cp.startStopCounter();
+        getDriver().switchTo().alert().dismiss();
+        cp.waitUntil(0, 2);
+        cp.startStopCounter();
+        getDriver().switchTo().alert().accept();
+
+        Assert.assertFalse(cp.submitEnabled(), "CNT_001: Submit is enabled");
+    }
 
     @Test
     private void CNT_003_ValidTaskLengths() throws Exception {
@@ -113,5 +113,5 @@ public class CounterTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
-    */
+
 }

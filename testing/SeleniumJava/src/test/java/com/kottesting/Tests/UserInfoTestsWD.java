@@ -31,7 +31,7 @@ public class UserInfoTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
-/*
+
     @Test
     private void USR_001_UserStatistics() throws Exception {
         System.out.println("USR_001");
@@ -63,7 +63,7 @@ public class UserInfoTestsWD extends DriverFactory {
         Assert.assertEquals(up.getProgressBarPercentage(), 21, "USR_001: Incorrect progressbar percentage");
 
     }
-*/
+
     @AfterTest
     private void cleanUp() throws Exception {
         HomePage hp = new HomePage();

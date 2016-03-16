@@ -1,6 +1,8 @@
 package com.kottesting.PageObjects;
 
 import com.kottesting.DriverFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +22,7 @@ public class CounterPage {
     @FindBy(id = "submitButton")
     private WebElement submitButton;
 
-    @FindBy(name = "comment")
+    @FindBy(id = "counterComment")
     private WebElement commentField;
 
     @FindBy(id = "startStop")
@@ -47,27 +49,19 @@ public class CounterPage {
 
         waitUntil(hours, minutes);
 
-        System.out.println("START COUNTER");
         startStopCounter();
-        System.out.println("COUNTER STARTED");
 
         if(hours == 0 && minutes < 15) {
             selenium.switchTo().alert().accept();
         }
 
-        System.out.println("INSERT COMMENT");
         WebDriverWait wait = new WebDriverWait(selenium, 5, 500);
         wait.until(ExpectedConditions.visibilityOf(commentField));
         commentField.sendKeys(comment);
-        System.out.println("COMMENT INSERTED");
 
-        if(submitEnabled()) {
-            submitButton.click();
-        }
+        submitButton.click();
 
-        System.out.println("CLEAR FIELD");
         commentField.clear();
-        System.out.println("FIELD CLEARED");
     }
 
     public void waitUntil(int hours, int minutes) {
@@ -86,10 +80,7 @@ public class CounterPage {
     }
 
     public boolean submitEnabled() {
-        if(submitButton.getAttribute("enabled") == null) {
-            return false;
-        }
-
-        return true;
+        //TODO: Read from attributes
+        return false;
     }
 }

@@ -58,6 +58,8 @@ public class TopListTestsWD extends DriverFactory {
         Assert.assertTrue(tp.getTeamName().equals(team), "TOP_001: Wrong or missing team name");
     }
 
+
+
     @AfterTest
     private void cleanUp() throws Exception {
         HomePage hp = new HomePage();
@@ -70,4 +72,5 @@ public class TopListTestsWD extends DriverFactory {
 
         getDriver().quit();
     }
+
 }

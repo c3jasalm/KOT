@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class LoginTestsWD extends DriverFactory {
-/*
+
     // FUN_001: Login With Correct Credentials
     @Test
     private void FUN_001_LoginWithCorrectCredentials() throws Exception {
@@ -56,5 +56,5 @@ public class LoginTestsWD extends DriverFactory {
         Assert.assertTrue(hp.canLogin(), "FUN_003: Login succeeded with incorrect credentials");
 
     }
-*/
+
 }
