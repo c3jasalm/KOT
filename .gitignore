@@ -4,6 +4,8 @@
 # Selenium
 testing/SeleniumJava/src/test/resources
 testing/SeleniumJava/target
+testing/RobotFW/Results
+testing/RobotFW/.idea
 
 
 # User-specific files
