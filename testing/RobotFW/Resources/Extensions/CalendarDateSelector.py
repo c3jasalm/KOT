@@ -11,6 +11,8 @@ class CalendarDateSelector(object):
         driver = se2lib._current_browser()
 
     def set_date(self, day, month, year):
+        CalendarDateSelector.get_webdriver_instance(self)
+
         CalendarDateSelector.select_year(self, year)
         CalendarDateSelector.select_month(self, month)
         CalendarDateSelector.select_date(self, day)
@@ -25,7 +27,6 @@ class CalendarDateSelector(object):
 
 
     def select_year(self, year):
-        CalendarDateSelector.get_webdriver_instance(self)
         global driver
         driver.find_element_by_id("dateTimeCalendar").click()
 

@@ -2,6 +2,7 @@
 Library  Selenium2Library
 Library  Collections
 Library  Dialogs
+Library  ../Extensions/TaskListExt.py
 
 
 *** Variables ***
@@ -28,3 +29,23 @@ Delete All Tasks
     ${count} =  Get Task Count
     : FOR  ${index}  IN RANGE  0  ${count}
     \  Delete First Task
+
+Verify Task Date
+    [Arguments]  ${expected_date}
+    ${task_date} =  Get Text  //*[@name='date']
+    Should Be Equal As Strings  ${expected_date}  ${task_date}  Task date is incorrect
+
+Verify Duration
+    [Arguments]  ${expected_duration}
+    ${task_duration} =  Get Text  //*[@name='duration']
+    Should Be Equal As Strings  ${expected_duration}  ${task_duration}  Task duration is incorrect
+
+Verify Comment
+    [Arguments]  ${expected_comment}
+    ${task_comment} =  Get Task Comment
+    Should Be Equal As Strings  ${expected_comment}  ${task_comment}  Task comment is incorrect
+
+Verify Task Count Is
+    [Arguments]  ${expected_count}
+    ${task_count} =  TaskList.Get Task Count
+    Should Be Equal As Integers  ${task_count}  ${expected_count}   Wrong task count, task not added

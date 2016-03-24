@@ -4,6 +4,7 @@ Library  Dialogs
 Resource  ../Resources/CourseTool.robot
 Resource  ../Resources/Common.robot
 Resource  ../Resources/PO/TaskList.robot
+Resource  ../Resources/PO/UserInfo.robot
 
 Test Setup  Common.Begin Web Test With Login
 Test Teardown  Common.End Web Test
@@ -13,35 +14,39 @@ Test Teardown  Common.End Web Test
 
 *** Test Cases ***
 SEL_001 Basic Task Manipulation
-    [Tags]  selector  smoke
-    Set Date  15  Jan  2015
-    Write Comment  SEL_001 Task 1
-    Submit Task
-    #Count tasks = 1
-    ${tasks} =  TaskList.Get Task Count
-    Should Be Equal As Integers  ${tasks}  1   Wrong task count, task not added
-    #Verify task content
-    #Verify user info total time
-    #Delete tasks
+    [Tags]  selector  smoke  current
+    Submit New Task And Verify Outcome  15  Jan  2015  01:00  SEL_001 Task 1
+
+    # Verify task count
+    Verify Task Count Is  1
+
+    # Verify user info total time
+    Verify User Info Total Hours Is  01:00
+
+    # Delete task and verify deletion
     Delete First Task
-    #Count tasks = 0
-    ${tasks} =  TaskList.Get Task Count
-    Should Be Equal As Integers  ${tasks}  0   Wrong task count, task not deleted
+    Verify Task Count Is  0
 
 SEL_002 Entering Multiple Tasks
-    [Tags]  selector  current
-    Set Date  15  Jan  2015
-    Write Comment  SEL_002 Task 1
-    Submit Task
-    Set Date  17  Jan  2015
-    Write Comment  SEL_002 Task 2
-    Submit Task
-    Set Date  18  Jan  2015
-    Write Comment  SEL_002 Task 3
-    Submit Task
-    ${tasks} =  TaskList.Get Task Count
-    Should Be Equal As Integers  ${tasks}  3   Wrong task count, tasks not added
-    #Verify user info total time
+    [Tags]  selector
+    Submit New Task  10  Jan  2015  01:00  SEL_002 Task 1
+    Submit New Task  13  Jan  2015  01:45  SEL_002 Task 2
+    Submit New Task  18  Jan  2015  02:30  SEL_002 Task 3
+
+    # Verify task count
+    Verify Task Count Is  3
+
+    # Verify user info total time
+    Verify User Info Total Hours Is  05:15
+
+    # Delete all tasks and verify deletion
     Delete All Tasks
-    ${tasks} =  TaskList.Get Task Count
-    Should Be Equal As Integers  ${tasks}  0   Wrong task count, tasks not deleted
+    Verify Task Count Is  0
+
+SEL_003 Task Description Is Mandatory
+    [Tags]  selector
+    Set Date  23  Feb  2015
+    Set Task Duration  00:45
+    Submit Task
+
+    Verify Task Count Is  0
