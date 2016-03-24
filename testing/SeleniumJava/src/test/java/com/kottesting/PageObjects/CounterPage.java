@@ -19,7 +19,7 @@ public class CounterPage {
 
     WebDriver selenium;
 
-    @FindBy(id = "submitButton")
+    @FindBy(id = "counterSubmitButton")
     private WebElement submitButton;
 
     @FindBy(id = "counterComment")
