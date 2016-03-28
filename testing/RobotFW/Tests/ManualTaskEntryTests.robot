@@ -14,7 +14,7 @@ Test Teardown  Common.End Web Test
 
 *** Test Cases ***
 SEL_001 Basic Task Manipulation
-    [Tags]  Selector  Smoke
+    [Tags]  Selector  Smoke  current
     Submit New Task And Verify Outcome  15  Jan  2015  01:00  SEL_001 Task 1
 
     # Verify task count
